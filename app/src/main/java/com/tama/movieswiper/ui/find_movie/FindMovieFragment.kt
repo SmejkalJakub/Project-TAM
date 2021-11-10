@@ -1,16 +1,19 @@
 package com.tama.movieswiper.ui.find_movie
 
+import android.graphics.Movie
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.tama.movieswiper.R
 import com.tama.movieswiper.databinding.FindMovieFragmentBinding
-import com.tama.movieswiper.ui.profile.ProfileViewModel
+import com.tama.movieswiper.imdb.MoviesAsynchronousGet
+import android.widget.ImageView;
+import com.tama.movieswiper.MainActivity
+
 
 class FindMovieFragment : Fragment() {
 
@@ -18,6 +21,10 @@ class FindMovieFragment : Fragment() {
     private var _binding: FindMovieFragmentBinding  ? = null
 
     private val binding get() = _binding!!
+
+    lateinit var moviesAsync: MoviesAsynchronousGet
+
+    var movieIndex: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,23 +39,45 @@ class FindMovieFragment : Fragment() {
 
         val root: View = binding.root
 
-        /*val textView: TextView = binding.textView
-        findMovieViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        });*/
+        findMovieViewModel.movieName.observe(viewLifecycleOwner, Observer { name ->
+            binding.movieTitle.text = name
+        })
+
+        findMovieViewModel.movieDescription.observe(viewLifecycleOwner, Observer { description ->
+            binding.movieDescription.text = description
+        })
+
+        findMovieViewModel.movieRating.observe(viewLifecycleOwner, Observer { rating ->
+            binding.movieRating.text = rating
+        })
+
+        findMovieViewModel.moviePoster.observe(viewLifecycleOwner, Observer { poster ->
+            binding.moviePicture.setImageBitmap(poster)
+        })
+
+        moviesAsync = MoviesAsynchronousGet()
+
+        (activity as MainActivity).set_find_movie_binding(binding, moviesAsync, findMovieViewModel, movieIndex)
 
         return root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        findMovieViewModel = ViewModelProvider(this).get(FindMovieViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        binding.showMovie.setOnClickListener(){
+            moviesAsync.getTopRatedMovies(findMovieViewModel)
+        }
+
+        binding.nextButton.setOnClickListener(){
+            movieIndex++
+            moviesAsync.getMovieDetails(findMovieViewModel, movieIndex)
+        }
+
+        binding.prevButton.setOnClickListener(){
+            movieIndex--
+            moviesAsync.getMovieDetails(findMovieViewModel, movieIndex)
+        }
     }
 
 }

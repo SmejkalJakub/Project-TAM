@@ -19,8 +19,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.tama.movieswiper.database.User
-import com.tama.movieswiper.databinding.ActivityMainBinding
-import com.tama.movieswiper.databinding.GroupsFragmentBinding
 import com.tama.movieswiper.ui.groups.GroupDetailViewModel
 import com.tama.movieswiper.ui.groups.GroupModel
 import com.tama.movieswiper.ui.groups.GroupsViewModel
@@ -36,13 +34,16 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.children
-import com.tama.movieswiper.databinding.CreateGroupFragmentBinding
-import com.tama.movieswiper.databinding.GroupDetailFragmentBinding
+import com.tama.movieswiper.databinding.*
+import com.tama.movieswiper.imdb.MoviesAsynchronousGet
+import com.tama.movieswiper.ui.find_movie.FindMovieViewModel
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    var movieIndex: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -173,7 +174,6 @@ class MainActivity : AppCompatActivity() {
                 _binding.deleteButton.visibility = View.GONE
                 _binding.leaveGroupButton.visibility = View.VISIBLE
             }
-
 
             it.child("users").children.forEach {
                 var text = TextView(this)
@@ -330,6 +330,31 @@ class MainActivity : AppCompatActivity() {
         registerViewModel.registerUser.observe(this, Observer { event ->
             event?.getContentIfNotHandledOrReturnNull()?.let {
                 create_user(it)
+            }
+        })
+    }
+
+    fun set_find_movie_binding(movieBinding: FindMovieFragmentBinding, movieAsync: MoviesAsynchronousGet, findMovieViewModel: FindMovieViewModel, _movieIndex: Int)
+    {
+        movieIndex = _movieIndex
+        movieBinding.movieFragmentFrame.setOnTouchListener(object : OnSwipeTouchListener(this@MainActivity) {
+            override fun onSwipeLeft() {
+                super.onSwipeLeft()
+                movieIndex++
+                movieAsync.getMovieDetails(findMovieViewModel, movieIndex)
+                Toast.makeText(this@MainActivity, "Swipe Left gesture detected",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
+            override fun onSwipeRight() {
+                super.onSwipeRight()
+                movieIndex--
+                movieAsync.getMovieDetails(findMovieViewModel, movieIndex)
+                Toast.makeText(
+                    this@MainActivity,
+                    "Swipe Right gesture detected",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }
