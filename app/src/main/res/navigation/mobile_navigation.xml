@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_login">
+
+    <fragment
+        android:id="@+id/navigation_find_movie"
+        android:name="com.tama.movieswiper.ui.find_movie.FindMovieFragment"
+        android:label="@string/title_find_movie"
+        tools:layout="@layout/find_movie_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.tama.movieswiper.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile"/>
+
+    <fragment
+        android:id="@+id/navigation_groups"
+        android:name="com.tama.movieswiper.ui.groups.GroupsFragment"
+        android:label="@string/title_groups"
+        tools:layout="@layout/groups_fragment" />
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.tama.movieswiper.ui.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" />
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.tama.movieswiper.ui.register.RegisterFragment"
+        android:label="register_fragment"
+        tools:layout="@layout/register_fragment" />
+    <fragment
+        android:id="@+id/navigation_create_group"
+        android:name="com.tama.movieswiper.ui.groups.CreateGroupFragment"
+        android:label="create_group_fragment"
+        tools:layout="@layout/create_group_fragment" />
+    <fragment
+        android:id="@+id/navigation_join_group"
+        android:name="com.tama.movieswiper.ui.groups.JoinGroupFragment"
+        android:label="join_group_fragment"
+        tools:layout="@layout/join_group_fragment" />
+    <fragment
+        android:id="@+id/navigation_group_detail"
+        android:name="com.tama.movieswiper.ui.groups.GroupDetailFragment"
+        android:label="group_detail_fragment"
+        tools:layout="@layout/group_detail_fragment" />
+</navigation>

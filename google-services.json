@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1025252742215",
+    "firebase_url": "https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "tama-project-26b9d",
+    "storage_bucket": "tama-project-26b9d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025252742215:android:07966588f0b489f0eb8d62",
+        "android_client_info": {
+          "package_name": "com.tama.movieswiper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025252742215-6mbjevb5fi07icki0920779904l22c85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhZkrzdOb7wN7tEFhkxrOJedp5X7dy4mQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025252742215-6mbjevb5fi07icki0920779904l22c85.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
