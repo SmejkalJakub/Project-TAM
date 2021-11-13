@@ -9,67 +9,18 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#000000">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/movieTitle"
-                android:layout_width="307dp"
-                android:layout_height="65dp"
-                android:text="TextView"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/moviePicture"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.97" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/movieDescription"
-                android:layout_width="307dp"
-                android:layout_height="65dp"
-                android:text="TextView"
-                app:layout_constraintBottom_toTopOf="@+id/movieRating"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/moviePicture" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/movieRating"
-                android:layout_width="307dp"
-                android:layout_height="65dp"
-                android:text="TextView"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/showMovie"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.51"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movieDescription" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/moviePicture"
                 android:layout_width="267dp"
                 android:layout_height="240dp"
+                android:translationX="48dp"
                 app:layout_constraintBottom_toTopOf="@+id/movieDescription"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.46"
@@ -79,39 +30,147 @@
         </TableRow>
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="309dp"
 
-            <Button
-                android:id="@+id/showMovie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_show_movie" />
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/movieTitle"
+                android:layout_width="307dp"
+                android:layout_height="70dp"
+                android:fontFamily="@font/actor"
+                android:gravity="fill|fill_horizontal"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:translationX="48dp"
+                app:layout_constraintBottom_toTopOf="@+id/moviePicture"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.97" />
 
         </TableRow>
 
         <TableRow
+            android:layout_width="307dp"
+            android:layout_height="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/movieRating"
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:fontFamily="@font/actor"
+                android:lineSpacingExtra="0dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="#DAC7C7"
+                android:textSize="18sp"
+                android:translationX="48dp"
+                app:layout_constraintBottom_toTopOf="@+id/showMovie"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/movieDescription" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="206dp"
+            android:layout_height="1px"
+            android:background="#BDBDBD">
+
+            <TextView
+                android:layout_width="310dp"
+                android:layout_height="1px"
+                android:layout_span="2"
+                android:text=""
+                android:translationX="48dp" />
+        </TableRow>
+
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:translationY="5dp">
+            <TextView
+                android:id="@+id/movieDescription"
+                android:layout_width="307dp"
+                android:layout_height="65dp"
+                android:fontFamily="@font/actor"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="#C4BABA"
+                android:translationX="48dp"
+                app:layout_constraintBottom_toTopOf="@+id/movieRating"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/moviePicture" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:translationY="30dp"
+            android:layout_height="match_parent">
+
+
+            <Button
+                android:id="@+id/showMovie"
+                android:layout_width="246dp"
+                android:layout_height="wrap_content"
+                android:text="@string/button_show_movie"
+                android:textColor="#000000"
+                android:translationX="48dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:translationY="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/nextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Další" />
+                android:text="Další"
+                android:textColor="#000000"
+                android:translationX="48dp" />
 
         </TableRow>
 
         <TableRow
+
+            android:translationY="30dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/prevButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Předchozí" />
+                android:text="Předchozí"
+                android:textColor="#000000"
+                android:translationX="48dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_height="1px" android:background="#BDBDBD"
+            android:translationY="50dp"
+            android:layout_width="310dp">
+
+            <TextView
+                android:layout_width="310dp"
+                android:layout_height="1px"
+                android:layout_span="2"
+                android:text=""
+                android:translationX="48dp" />
         </TableRow>
     </TableLayout>
+
+
 
 </FrameLayout>
