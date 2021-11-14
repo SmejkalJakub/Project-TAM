@@ -91,6 +91,20 @@
                 android:text="Sign up"
                 android:translationX="120dp" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="206dp"
+            android:layout_height="1px"
+            android:translationY="456dp"
+            android:background="#BDBDBD">
+
+            <TextView
+                android:layout_width="310dp"
+                android:layout_height="1px"
+                android:layout_span="2"
+                android:text=""
+                android:translationX="48dp" />
+        </TableRow>
     </TableLayout>
 
 </FrameLayout>
