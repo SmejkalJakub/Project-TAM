@@ -7,11 +7,12 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#000000">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -22,36 +23,54 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:translationY="220dp">
 
             <Button
                 android:id="@+id/leaveGroupButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Leave Group" />
+                android:text="Leave Group"
+                android:translationX="130dp" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:text="Delete" />
+                android:text="Delete"
+                android:visibility="gone" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:translationY="220dp">
 
             <Button
                 android:id="@+id/backToGroupsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Back" />
+                android:text="Back"
+                android:translationX="130dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="206dp"
+            android:layout_height="1px"
+            android:translationY="504dp"
+            android:background="#BDBDBD">
+
+            <TextView
+                android:layout_width="310dp"
+                android:layout_height="1px"
+                android:layout_span="2"
+                android:text=""
+                android:translationX="48dp" />
         </TableRow>
     </TableLayout>
 
