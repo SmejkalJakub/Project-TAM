@@ -8,28 +8,38 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="931dp"
+        android:background="#000000">
 
         <TableRow
+            android:translationY="200dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:layout_width="172dp"
                 android:layout_height="match_parent"
-                android:text="@string/prompt_email" />
+                android:fontFamily="@font/averia_libre"
+                android:gravity="center"
+                android:text="@string/prompt_email"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/loginEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#25FFFFFF"
                 android:ems="10"
                 android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="#B9B6B6"
+                android:textColorHint="#3ED6D3D3" />
 
         </TableRow>
 
         <TableRow
+            android:translationY="210dp"
             android:layout_width="match_parent"
             android:layout_height="236dp">
 
@@ -37,37 +47,49 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/prompt_password" />
+                android:fontFamily="@font/averia_libre"
+                android:gravity="center"
+                android:text="@string/prompt_password"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/loginPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#26FFFFFF"
                 android:ems="10"
                 android:hint="@string/prompt_password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#3CA6A1A1" />
         </TableRow>
 
         <TableRow
+            android:translationY="220dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/loginButton"
                 android:layout_width="152dp"
                 android:layout_height="match_parent"
-                android:text="Login" />
+                android:gravity="center"
+                android:text="Login"
+                android:translationX="120dp" />
         </TableRow>
 
         <TableRow
+            android:translationY="220dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/signUpButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign up" />
+                android:text="Sign up"
+                android:translationX="120dp" />
         </TableRow>
     </TableLayout>
 
