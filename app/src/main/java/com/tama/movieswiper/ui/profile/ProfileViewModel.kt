@@ -28,7 +28,8 @@ class ProfileViewModel() : ViewModel() {
 
         var email = binding.profileEmail.text.toString()
         var password = binding.profilePassword.text.toString()
+        var confirmPassword = binding.profileConfirmPassword.text.toString()
 
-        updateUser.postValue(Event(UserModel(email, password, Firebase.auth)))
+        updateUser.postValue(Event(UserModel(email, password, confirmPassword, Firebase.auth)))
     }
 }

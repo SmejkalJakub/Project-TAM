@@ -14,6 +14,7 @@ import com.tama.movieswiper.database.BasicMovie
 import com.tama.movieswiper.database.MovieDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import java.io.InputStream
@@ -27,6 +28,10 @@ class FindMovieViewModel : ViewModel() {
     val movieDescription = MutableLiveData<String>()
     val movieRating = MutableLiveData<String>()
     val moviePoster = MutableLiveData<Bitmap>()
+    val movieRuntime = MutableLiveData<String>()
+
+    val movieGenres = MutableLiveData<JSONArray>()
+
 
     fun loadMovies(_movies: Array<String>)
     {
@@ -56,7 +61,7 @@ class FindMovieViewModel : ViewModel() {
 
         val titleJson = JSONObject(movieData.getString("title"))
 
-        val categoriesJson = movieData.getJSONArray("genres")
+        val genresJson = movieData.getJSONArray("genres")
 
         val imageJson = JSONObject(titleJson.getString("image"));
         val imageURL = imageJson.getString("url")
@@ -68,6 +73,8 @@ class FindMovieViewModel : ViewModel() {
         val ratingScore = ratingJson.getString("rating")
 
         var inputStream: InputStream? = null
+
+        var runtimeInMinutes = titleJson.getString("runningTimeInMinutes")
 
         try {
             inputStream = URL(imageURL).openStream()
@@ -85,27 +92,11 @@ class FindMovieViewModel : ViewModel() {
 
         movieName.postValue(movie.movieTitle)
         movieDescription.postValue(descriptionText)
-        movieRating.postValue("Rating $ratingScore")
+        movieRating.postValue("IMDb $ratingScore/10 ★")
         moviePoster.postValue(bitmap)
+        movieRuntime.postValue("Runtime: $runtimeInMinutes minutes" )
 
-
-        /*GlobalScope.launch {
-            movieDao.insert(movie)
-        }
-
-        val db_movies = movieDao.getAllMovies()
-
-        this@_MainActivity.runOnUiThread(java.lang.Runnable {
-            var movieTitleText: TextView = findViewById<View>(R.id.movieTitle) as TextView
-            var imageView: ImageView = findViewById<View>(R.id.moviePicture) as ImageView
-            var movieText: TextView = findViewById<View>(R.id.movieDescription) as TextView
-            var movieRatingText: TextView = findViewById<View>(R.id.movieRating) as TextView
-
-            movieTitleText.text = titleJson.getString("title")
-            imageView.setImageBitmap(bitmap)
-            movieText.text = descriptionText
-            movieRatingText.text = "Rating: " + ratingScore
-        })*/
+        movieGenres.postValue(genresJson)
 
     }
 }

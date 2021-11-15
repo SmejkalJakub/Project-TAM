@@ -21,6 +21,7 @@ data class GenreModel(
     var mystery: Int = 50,
     var news: Int = 50,
     var reality_tv: Int = 50,
+    var romance: Int = 50,
     var sci_fi: Int = 50,
     var short: Int = 50,
     var sport: Int = 50,

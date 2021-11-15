@@ -9,11 +9,13 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000">
+        android:background="#000000"
+        android:gravity="center">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -23,56 +25,36 @@
                     android:id="@+id/linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" />
+                    android:gravity="center"
+                    android:orientation="vertical"/>
             </ScrollView>
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:translationY="220dp">
+            android:gravity="center">
 
             <Button
                 android:id="@+id/createGroupButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Create Group"
-                android:translationX="130dp" />
+                android:text="Create Group" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:translationY="220dp">
+            android:gravity="center">
 
             <Button
                 android:id="@+id/joinGroupButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Join Group"
-                android:translationX="130dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="206dp"
-            android:layout_height="1px"
-            android:translationY="504dp"
-            android:background="#BDBDBD">
-
-            <TextView
-                android:layout_width="310dp"
-                android:layout_height="1px"
-                android:layout_span="2"
-                android:text=""
-                android:translationX="48dp" />
+                android:text="Join Group" />
         </TableRow>
 
     </TableLayout>
-
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="end" />
 
 </FrameLayout>

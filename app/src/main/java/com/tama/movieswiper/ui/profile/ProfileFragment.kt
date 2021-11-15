@@ -51,6 +51,7 @@ class ProfileFragment : Fragment() {
         binding.logOutButton.setOnClickListener {
             Firebase.auth.signOut()
             navController.navigate(R.id.navigation_login)
+            (activity as MainActivity).show_navView(false)
         }
     }
 

@@ -8,35 +8,45 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000">
+        android:background="#000000"
+        android:gravity="center">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"></LinearLayout>
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="asdawdawdasdhjashdkjashdkjashd" />
+            </LinearLayout>
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:translationY="220dp">
+            android:gravity="center">
 
             <Button
                 android:id="@+id/leaveGroupButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Leave Group"
-                android:translationX="130dp" />
+                android:text="Leave Group" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <Button
                 android:id="@+id/deleteButton"
@@ -49,29 +59,15 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:translationY="220dp">
+            android:gravity="center">
 
             <Button
                 android:id="@+id/backToGroupsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Back"
-                android:translationX="130dp" />
+                android:text="Back" />
         </TableRow>
 
-        <TableRow
-            android:layout_width="206dp"
-            android:layout_height="1px"
-            android:translationY="504dp"
-            android:background="#BDBDBD">
-
-            <TextView
-                android:layout_width="310dp"
-                android:layout_height="1px"
-                android:layout_span="2"
-                android:text=""
-                android:translationX="48dp" />
-        </TableRow>
     </TableLayout>
 
 </FrameLayout>

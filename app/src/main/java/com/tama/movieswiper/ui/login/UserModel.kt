@@ -6,5 +6,6 @@ import com.google.firebase.ktx.Firebase
 data class UserModel(
     var email: String,
     var password: String,
+    var passwordConfirmation : String?,
     var auth: FirebaseAuth
 )

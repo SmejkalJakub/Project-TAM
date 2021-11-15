@@ -8,8 +8,9 @@
         <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.22135416666666666" />
-        <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/create_group_fragment.xml" value="0.3645833333333333" />
+        <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/drawable/selector.xml" value="0.3828125" />
+        <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/create_group_fragment.xml" value="0.25" />
         <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/find_movie_fragment.xml" value="0.33" />
         <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/fragment_dashboard.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/fragment_home.xml" value="0.20520833333333333" />
@@ -19,9 +20,9 @@
         <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/group_detail_fragment.xml" value="0.25" />
         <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/groups_fragment.xml" value="0.22" />
         <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/join_group_fragment.xml" value="0.3645833333333333" />
-        <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/login_fragment.xml" value="0.41041666666666665" />
+        <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/login_fragment.xml" value="0.39282153539381853" />
         <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/profile.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/register_fragment.xml" value="0.22814128546612622" />
+        <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/layout/register_fragment.xml" value="0.33" />
         <entry key="..\:/Users/Kubaa/OneDrive/Vysoka/TAMa/Bottom_bar/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
       </map>
     </option>

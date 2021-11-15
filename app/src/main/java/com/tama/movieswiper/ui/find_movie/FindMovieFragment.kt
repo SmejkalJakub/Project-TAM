@@ -3,6 +3,7 @@ package com.tama.movieswiper.ui.find_movie
 import android.graphics.Movie
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,11 @@ import com.tama.movieswiper.R
 import com.tama.movieswiper.databinding.FindMovieFragmentBinding
 import com.tama.movieswiper.imdb.MoviesAsynchronousGet
 import android.widget.ImageView;
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.tama.movieswiper.MainActivity
+import com.tama.movieswiper.database.GenreModel
 
 
 class FindMovieFragment : Fragment() {
@@ -55,7 +60,12 @@ class FindMovieFragment : Fragment() {
             binding.moviePicture.setImageBitmap(poster)
         })
 
+        findMovieViewModel.movieRuntime.observe(viewLifecycleOwner, Observer { runtime ->
+            binding.movieRuntime.text = runtime
+        })
+
         moviesAsync = MoviesAsynchronousGet()
+        moviesAsync.getTopRatedMovies(findMovieViewModel)
 
         (activity as MainActivity).set_find_movie_binding(binding, moviesAsync, findMovieViewModel, movieIndex)
 

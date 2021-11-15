@@ -28,7 +28,7 @@ class LoginViewModel : ViewModel() {
             return
         }
 
-        loginUser.postValue(Event(UserModel(loginEmail, loginPassword, auth)))
+        loginUser.postValue(Event(UserModel(loginEmail, loginPassword, null, auth)))
     }
 
     fun switch_to_sign_up(navController: NavController)

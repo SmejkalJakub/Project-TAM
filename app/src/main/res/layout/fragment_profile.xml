@@ -8,12 +8,14 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000">
+        android:background="#000000"
+        android:gravity="center">
 
         <TableRow
-            android:translationY="200dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/textView6"
@@ -33,13 +35,15 @@
                 android:ems="10"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
+                android:textColor="#B9B6B6"
                 android:textColorHint="#26FFFFFF" />
         </TableRow>
 
         <TableRow
-            android:translationY="210dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/textView7"
@@ -59,48 +63,62 @@
                 android:ems="10"
                 android:hint="New Password"
                 android:inputType="textPassword"
+                android:textColor="#B9B6B6"
                 android:textColorHint="#26FFFFFF" />
         </TableRow>
 
         <TableRow
-            android:translationY="220dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/averia_libre"
+                android:gravity="center"
+                android:text="Confirm Password"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/profileConfirmPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#26FFFFFF"
+                android:ems="10"
+                android:hint="Confirm New Password"
+                android:inputType="textPassword"
+                android:textColor="#B9B6B6"
+                android:textColorHint="#26FFFFFF" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <Button
                 android:id="@+id/updateButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:translationX="120dp"
                 android:text="Update" />
 
         </TableRow>
 
         <TableRow
-            android:translationY="220dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <Button
                 android:id="@+id/logOutButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:translationX="120dp"
                 android:text="Log out" />
         </TableRow>
 
-        <TableRow
-            android:layout_width="206dp"
-            android:layout_height="1px"
-            android:translationY="456dp"
-            android:background="#BDBDBD">
-
-            <TextView
-                android:layout_width="310dp"
-                android:layout_height="1px"
-                android:layout_span="2"
-                android:text=""
-                android:translationX="48dp" />
-        </TableRow>
     </TableLayout>
 </FrameLayout>

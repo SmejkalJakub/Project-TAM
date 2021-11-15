@@ -22,11 +22,11 @@ class RegisterViewModel : ViewModel() {
     val registerUser = MutableLiveData<Event<UserModel>>()
 
 
-    fun register(registerEmail: String, registerPassword: String)
+    fun register(registerEmail: String, registerPassword: String, confirmationPassword: String)
     {
         auth = Firebase.auth
 
-        registerUser.postValue(Event(UserModel(registerEmail, registerPassword, auth)))
+        registerUser.postValue(Event(UserModel(registerEmail, registerPassword, confirmationPassword, auth)))
     }
 
     fun return_to_login(navController: NavController)

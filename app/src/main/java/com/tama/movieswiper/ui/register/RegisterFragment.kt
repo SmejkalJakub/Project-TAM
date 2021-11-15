@@ -43,7 +43,9 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
-        binding.registerButton.setOnClickListener { registerViewModel.register(binding.registerEmail.text.toString(), binding.registerPassword.text.toString()) }
+        binding.registerButton.setOnClickListener { registerViewModel.register(binding.registerEmail.text.toString(),
+            binding.registerPassword.text.toString(), binding.confirmPassword.text.toString()) }
+        
         binding.backButton.setOnClickListener { registerViewModel.return_to_login(navController) }
     }
 }
