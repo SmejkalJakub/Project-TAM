@@ -1,23 +1,17 @@
 package com.tama.movieswiper.ui.find_movie
 
-import android.graphics.Movie
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.tama.movieswiper.R
 import com.tama.movieswiper.databinding.FindMovieFragmentBinding
 import com.tama.movieswiper.imdb.MoviesAsynchronousGet
-import android.widget.ImageView;
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.tama.movieswiper.MainActivity
-import com.tama.movieswiper.database.GenreModel
+import com.tama.movieswiper.database.MovieDatabase
+import org.jetbrains.anko.doAsync
 
 
 class FindMovieFragment : Fragment() {
@@ -30,6 +24,9 @@ class FindMovieFragment : Fragment() {
     lateinit var moviesAsync: MoviesAsynchronousGet
 
     var movieIndex: Int = 0
+
+    private lateinit var mDb: MovieDatabase
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,8 +61,24 @@ class FindMovieFragment : Fragment() {
             binding.movieRuntime.text = runtime
         })
 
-        moviesAsync = MoviesAsynchronousGet()
-        moviesAsync.getTopRatedMovies(findMovieViewModel)
+        moviesAsync = MoviesAsynchronousGet(requireActivity().application)
+
+        mDb = MovieDatabase.getInstance(requireActivity().application)!!
+
+        var moviesInDb = false
+        doAsync {
+            // Get the student list from database
+            val list = mDb.basicMovieDao().getNotSeenMovies()
+
+            if(!list.isEmpty())
+            {
+                findMovieViewModel.changeMovie(list.random())
+            }
+            else
+            {
+                moviesAsync.getTopRatedMovies(findMovieViewModel)
+            }
+        }
 
         (activity as MainActivity).set_find_movie_binding(binding, moviesAsync, findMovieViewModel, movieIndex)
 

@@ -1,6 +1,5 @@
 package com.tama.movieswiper
 
-import android.R.attr
 import android.R.attr.*
 import android.content.ContentValues
 import android.content.ContentValues.TAG
@@ -20,7 +19,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.tama.movieswiper.database.User
-import com.tama.movieswiper.ui.groups.GroupDetailViewModel
 import com.tama.movieswiper.ui.groups.GroupModel
 import com.tama.movieswiper.ui.groups.GroupsViewModel
 import com.tama.movieswiper.ui.login.LoginViewModel
@@ -28,18 +26,30 @@ import com.tama.movieswiper.ui.login.UserModel
 import com.tama.movieswiper.ui.profile.ProfileViewModel
 import com.tama.movieswiper.ui.register.RegisterViewModel
 import android.graphics.Color
-import android.opengl.Visibility
-import android.view.Gravity
 
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.children
-import androidx.core.view.marginBottom
+import com.haroldadmin.cnradapter.NetworkResponse
+import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
+import com.tama.movieswiper.database.BasicMovie
 import com.tama.movieswiper.database.GenreModel
+import com.tama.movieswiper.database.MovieDatabase
 import com.tama.movieswiper.databinding.*
 import com.tama.movieswiper.imdb.MoviesAsynchronousGet
 import com.tama.movieswiper.ui.find_movie.FindMovieViewModel
+import de.vkay.api.tmdb.TMDb
+import de.vkay.api.tmdb.models.TmdbGenre
+import de.vkay.api.tmdb.models.TmdbMovie
+import de.vkay.api.tmdb.models.TmdbPage
+import de.vkay.api.tmdb.models.TmdbShow
+import kotlinx.coroutines.*
 import org.json.JSONArray
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
+import retrofit2.Retrofit
+import java.io.IOException
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
@@ -48,9 +58,12 @@ class MainActivity : AppCompatActivity() {
 
     var movieIndex: Int = 0
 
-    var currentMovieGenres = JSONArray()
+    lateinit var currentMovieGenres : List<String>
+    var currentMovie = BasicMovie()
 
     var currentUserPreferences = GenreModel()
+    private lateinit var mDb:MovieDatabase
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
+        mDb = MovieDatabase.getInstance(applicationContext)!!
 
         navView.visibility = View.GONE
 
@@ -74,6 +88,13 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+        doAsync {
+            // Get the student list from database
+            //mDb.basicMovieDao().clear()
+        }
+
 
         var auth = Firebase.auth
         val currentUser = auth.currentUser
@@ -95,30 +116,21 @@ class MainActivity : AppCompatActivity() {
 
         database.child("users").child(currentUser?.uid.toString()).child("genres").get().addOnSuccessListener {
             currentUserPreferences.action =         it.child("action").value.toString().toInt()
-            currentUserPreferences.adult =          it.child("adult").value.toString().toInt()
             currentUserPreferences.adventure =      it.child("adventure").value.toString().toInt()
             currentUserPreferences.animation =      it.child("animation").value.toString().toInt()
-            currentUserPreferences.biography =      it.child("biography").value.toString().toInt()
             currentUserPreferences.comedy =         it.child("comedy").value.toString().toInt()
             currentUserPreferences.crime =          it.child("crime").value.toString().toInt()
             currentUserPreferences.documentary =    it.child("documentary").value.toString().toInt()
             currentUserPreferences.drama =          it.child("drama").value.toString().toInt()
             currentUserPreferences.family =         it.child("family").value.toString().toInt()
             currentUserPreferences.fantasy =        it.child("fantasy").value.toString().toInt()
-            currentUserPreferences.film_noir =      it.child("film_noir").value.toString().toInt()
-            currentUserPreferences.game_show =      it.child("game_show").value.toString().toInt()
             currentUserPreferences.history =        it.child("history").value.toString().toInt()
             currentUserPreferences.horror =         it.child("horror").value.toString().toInt()
             currentUserPreferences.music =          it.child("music").value.toString().toInt()
-            currentUserPreferences.musical =        it.child("musical").value.toString().toInt()
             currentUserPreferences.mystery =        it.child("mystery").value.toString().toInt()
-            currentUserPreferences.news =           it.child("news").value.toString().toInt()
-            currentUserPreferences.reality_tv =     it.child("reality_tv").value.toString().toInt()
             currentUserPreferences.romance =        it.child("romance").value.toString().toInt()
             currentUserPreferences.sci_fi =         it.child("sci_fi").value.toString().toInt()
-            currentUserPreferences.short =          it.child("short").value.toString().toInt()
-            currentUserPreferences.sport =          it.child("sport").value.toString().toInt()
-            currentUserPreferences.talk_show =      it.child("talk_show").value.toString().toInt()
+            currentUserPreferences.tv_movie =       it.child("tv_movie").value.toString().toInt()
             currentUserPreferences.thriller =       it.child("thriller").value.toString().toInt()
             currentUserPreferences.war =            it.child("war").value.toString().toInt()
             currentUserPreferences.western =        it.child("western").value.toString().toInt()
@@ -437,30 +449,21 @@ class MainActivity : AppCompatActivity() {
         when (genre)
         {
             "Action" -> currentUserPreferences.action += addition
-            "Adult" -> currentUserPreferences.adult += addition
             "Adventure" -> currentUserPreferences.adventure += addition
             "Animation" -> currentUserPreferences.animation += addition
-            "Biography" -> currentUserPreferences.biography += addition
             "Comedy" -> currentUserPreferences.comedy += addition
             "Crime" -> currentUserPreferences.crime += addition
             "Documentary" -> currentUserPreferences.documentary += addition
             "Drama" -> currentUserPreferences.drama += addition
             "Family" -> currentUserPreferences.family += addition
             "Fantasy" -> currentUserPreferences.fantasy += addition
-            "Film-Noir" -> currentUserPreferences.film_noir += addition
-            "Game-Show" -> currentUserPreferences.game_show += addition
             "History" -> currentUserPreferences.history += addition
             "Horror" -> currentUserPreferences.horror += addition
-            "Musical" -> currentUserPreferences.music += addition
-            "Music" -> currentUserPreferences.musical += addition
+            "Music" -> currentUserPreferences.music += addition
             "Mystery" -> currentUserPreferences.mystery += addition
-            "News" -> currentUserPreferences.news += addition
-            "Reality-TV" -> currentUserPreferences.reality_tv += addition
             "Romance" -> currentUserPreferences.romance += addition
-            "Sci-Fi" -> currentUserPreferences.sci_fi += addition
-            "Short" -> currentUserPreferences.short += addition
-            "Sport" -> currentUserPreferences.sport += addition
-            "Talk-Show" -> currentUserPreferences.talk_show += addition
+            "Science Fiction" -> currentUserPreferences.sci_fi += addition
+            "TV Movie" -> currentUserPreferences.tv_movie += addition
             "Thriller" -> currentUserPreferences.thriller += addition
             "War" -> currentUserPreferences.war += addition
             "Western" -> currentUserPreferences.western += addition
@@ -472,14 +475,28 @@ class MainActivity : AppCompatActivity() {
         findMovieViewModel.movieGenres.observe(this, Observer { genres ->
             currentMovieGenres = genres
         })
-        movieIndex = _movieIndex
+        findMovieViewModel.currentMovie.observe(this, Observer { movie ->
+            currentMovie = movie
+        })
         movieBinding.movieFragmentFrame.setOnTouchListener(object : OnSwipeTouchListener(this@MainActivity) {
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
                 //HATE
-                movieIndex++
+                mDb = MovieDatabase.getInstance(applicationContext)!!
+                currentMovie.visited = 1;
+                currentMovie.liked = 0;
+                runBlocking {
+                    val job: Job = launch(context = Dispatchers.Default) {
+                        println("[${Thread.currentThread().name}] Launched coroutine")
+                        mDb.basicMovieDao().update(currentMovie)
+                        println("[${Thread.currentThread().name}] Finished coroutine")
+                    }
+                    println("[${Thread.currentThread().name}] Created coroutine")
+                    job.join()
+                    println("[${Thread.currentThread().name}] Finished coroutine")
+                }
 
-                for (i in 0 until currentMovieGenres.length()) {
+                for (i in 0 until currentMovieGenres.size) {
                     val item = currentMovieGenres[i]
                     update_preferences(item.toString(), false)
                 }
@@ -489,16 +506,38 @@ class MainActivity : AppCompatActivity() {
                 val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
                 database.child("users").child(currentUser?.uid.toString()).child("genres").setValue(currentUserPreferences)
 
-                movieAsync.getMovieDetails(findMovieViewModel, movieIndex)
                 Toast.makeText(this@MainActivity, "Swipe Left gesture detected",
                     Toast.LENGTH_SHORT)
                     .show()
+
+                doAsync {
+                    // Get the student list from database
+                    val list = mDb.basicMovieDao().getNotSeenMovies()
+
+                    if (!list.isEmpty()) {
+                        findMovieViewModel.changeMovie(list.random())
+                    }
+                }
             }
             override fun onSwipeRight() {
                 super.onSwipeRight()
                 //LIKE
-                movieIndex++
-                for (i in 0 until currentMovieGenres.length()) {
+                mDb = MovieDatabase.getInstance(applicationContext)!!
+                currentMovie.visited = 1;
+                currentMovie.liked = 1
+                runBlocking {
+                    val job: Job = launch(context = Dispatchers.Default) {
+                        println("[${Thread.currentThread().name}] Launched coroutine")
+                        mDb.basicMovieDao().update(currentMovie)
+                        println("[${Thread.currentThread().name}] Finished coroutine")
+                    }
+                    println("[${Thread.currentThread().name}] Created coroutine")
+                    job.join()
+                    println("[${Thread.currentThread().name}] Finished coroutine")
+                }
+
+
+                for (i in 0 until currentMovieGenres.size) {
                     val item = currentMovieGenres[i]
                     update_preferences(item.toString(), true)
                 }
@@ -508,7 +547,18 @@ class MainActivity : AppCompatActivity() {
                 val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
                 database.child("users").child(currentUser?.uid.toString()).child("genres").setValue(currentUserPreferences)
 
-                movieAsync.getMovieDetails(findMovieViewModel, movieIndex)
+                doAsync {
+                    // Get the student list from database
+                    val list = mDb.basicMovieDao().getNotSeenMovies()
+
+                    if (!list.isEmpty()) {
+                        findMovieViewModel.changeMovie(list.random())
+                    }
+                    if(list.size < 5)
+                    {
+                        movieAsync.loadNewMovies(findMovieViewModel, currentUser)
+                    }
+                }
                 Toast.makeText(
                     this@MainActivity,
                     "Swipe Right gesture detected",

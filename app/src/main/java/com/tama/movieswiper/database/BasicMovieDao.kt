@@ -9,8 +9,8 @@ import androidx.room.Update
 
 @Dao
 interface BasicMovieDao {
-    @Insert
-    suspend fun insert(movie: BasicMovie)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insert(movie: BasicMovie)
 
     /**
      * When updating a row with a value already set in a column,
@@ -19,7 +19,7 @@ interface BasicMovieDao {
      * @param night new value to write
      */
     @Update
-    suspend  fun update(movie: BasicMovie)
+    fun update(movie: BasicMovie)
 
     /**
      * Selects and returns the row that matches the supplied start time, which is our key.
@@ -27,14 +27,14 @@ interface BasicMovieDao {
      * @param key startTimeMilli to match
      */
     @Query("SELECT * from basic_movies_table WHERE movieId = :key")
-    suspend fun get(key: String): BasicMovie?
+    fun get(key: String): BasicMovie?
     /**
      * Deletes all values from the table.
      *
      * This does not delete the table, only its contents.
      */
     @Query("DELETE FROM basic_movies_table")
-    suspend fun clear()
+    fun clear()
 
     /**
      * Selects and returns all rows in the table,
@@ -42,7 +42,10 @@ interface BasicMovieDao {
      * sorted by start time in descending order.
      */
     @Query("SELECT * FROM basic_movies_table ORDER BY movie_rating DESC")
-    fun getAllMovies(): LiveData<List<BasicMovie>>
+    fun getAllMovies(): List<BasicMovie>
+
+    @Query("SELECT * FROM basic_movies_table WHERE visited=0")
+    fun getNotSeenMovies(): List<BasicMovie>
 
     /**
      * Selects and returns the latest night.

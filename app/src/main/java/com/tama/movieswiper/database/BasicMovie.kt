@@ -6,16 +6,34 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "basic_movies_table")
-class BasicMovie {
+data class BasicMovie(
     @PrimaryKey(autoGenerate = false)
-    var movieId: String = ""
+    var movieId: String = "",
+
+    @ColumnInfo(name = "imdb_id")
+    var imdbId: String = "",
 
     @ColumnInfo(name = "movie_title")
-    var movieTitle: String = ""
+    var movieTitle: String = "",
+
+    @ColumnInfo(name = "movie_description")
+    var movieDescription: String = "",
+
+    @ColumnInfo(name = "movie_runtime")
+    var movieRuntime: Int = 0,
+
+    @ColumnInfo(name = "genres")
+    var movieGenres: String = "",
 
     @ColumnInfo(name = "movie_rating")
-    var rating: Double = -1.0
+    var rating: Double = -1.0,
 
     @ColumnInfo(name = "movie_image_url")
-    var imageURL: String = ""
-}
+    var imageURL: String = "",
+
+    @ColumnInfo(name = "visited")
+    var visited: Int = 0,
+
+    @ColumnInfo(name = "liked")
+    var liked: Int = 0
+)

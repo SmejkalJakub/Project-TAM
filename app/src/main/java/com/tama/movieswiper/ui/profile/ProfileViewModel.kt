@@ -1,15 +1,11 @@
 package com.tama.movieswiper.ui.profile
 
 import Event
-import androidx.databinding.Observable
 import androidx.lifecycle.*
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.tama.movieswiper.database.ProfileDao
 import com.tama.movieswiper.databinding.FragmentProfileBinding
 import com.tama.movieswiper.ui.login.UserModel
-import kotlinx.coroutines.launch
 
 class ProfileViewModel() : ViewModel() {
 
