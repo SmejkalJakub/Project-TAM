@@ -42,6 +42,8 @@ class FindMovieViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun saveMovieToDb(movieId: Int, movieData: TmdbMovie)
     {
+        mDb = MovieDatabase.getInstance(getApplication<Application>().applicationContext)!!
+
         val title = movieData.title
 
         var genres = ""
@@ -79,17 +81,9 @@ class FindMovieViewModel(application: Application) : AndroidViewModel(applicatio
             return
         }
 
-        mDb = MovieDatabase.getInstance(getApplication<Application>().applicationContext)!!
-
         mDb.runInTransaction(java.lang.Runnable {
             mDb.basicMovieDao().insert(movie)
         })
-
-        if(!loaded)
-        {
-            changeToRandomMovie()
-            loaded = true
-        }
     }
 
     fun changeMovie(movie: BasicMovie)

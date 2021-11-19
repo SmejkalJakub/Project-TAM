@@ -64,6 +64,8 @@ class MainActivity : AppCompatActivity() {
     var currentUserPreferences = GenreModel()
     private lateinit var mDb:MovieDatabase
 
+    var addingMovies = false;
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -517,6 +519,12 @@ class MainActivity : AppCompatActivity() {
                     if (!list.isEmpty()) {
                         findMovieViewModel.changeMovie(list.random())
                     }
+                    if(list.size < 5 && !addingMovies)
+                    {
+                        addingMovies = true
+                        movieAsync.loadNewMovies(findMovieViewModel, currentUser)
+                        addingMovies = false
+                    }
                 }
             }
             override fun onSwipeRight() {
@@ -554,9 +562,11 @@ class MainActivity : AppCompatActivity() {
                     if (!list.isEmpty()) {
                         findMovieViewModel.changeMovie(list.random())
                     }
-                    if(list.size < 5)
+                    if(list.size < 5 && !addingMovies)
                     {
+                        addingMovies = true
                         movieAsync.loadNewMovies(findMovieViewModel, currentUser)
+                        addingMovies = false
                     }
                 }
                 Toast.makeText(
