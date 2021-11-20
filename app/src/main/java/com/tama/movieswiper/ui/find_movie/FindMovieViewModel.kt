@@ -6,14 +6,19 @@ import android.graphics.BitmapFactory
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.room.Room
+import com.haroldadmin.cnradapter.NetworkResponse
 import com.tama.movieswiper.R
 import com.tama.movieswiper.database.BasicMovie
 import com.tama.movieswiper.database.MovieDatabase
+import de.vkay.api.tmdb.TMDb
 import de.vkay.api.tmdb.models.TmdbMovie
 import kotlinx.coroutines.*
 import org.jetbrains.anko.doAsync
@@ -114,6 +119,15 @@ class FindMovieViewModel(application: Application) : AndroidViewModel(applicatio
 
         currentMovie.postValue(movie)
     }
+
+    fun getMovieDetailedInfo(navController: NavController)
+    {
+        var id = currentMovie.value?.movieId
+
+        val bundle = bundleOf("id" to id)
+        navController.navigate(R.id.navigation_movie_detail, bundle)
+    }
+
     fun changeToRandomMovie()
     {
         mDb = MovieDatabase.getInstance(getApplication<Application>().applicationContext)!!

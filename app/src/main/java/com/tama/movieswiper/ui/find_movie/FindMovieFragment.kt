@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.tama.movieswiper.databinding.FindMovieFragmentBinding
 import com.tama.movieswiper.imdb.MoviesAsynchronousGet
 import com.tama.movieswiper.MainActivity
+import com.tama.movieswiper.R
 import com.tama.movieswiper.database.MovieDatabase
 import org.jetbrains.anko.doAsync
 
@@ -26,6 +29,7 @@ class FindMovieFragment : Fragment() {
     var movieIndex: Int = 0
 
     private lateinit var mDb: MovieDatabase
+    private lateinit var navController: NavController
 
 
     override fun onCreateView(
@@ -65,6 +69,35 @@ class FindMovieFragment : Fragment() {
 
         mDb = MovieDatabase.getInstance(requireActivity().application)!!
 
+        try
+        {
+            var args = arguments
+            if(arguments != null)
+            {
+                var movieId = args?.getString("id")!!
+                if(movieId != null)
+                {
+                    var moviesInDb = false
+                    doAsync {
+                        // Get the student list from database
+                        val movie = mDb.basicMovieDao().get(movieId)
+                        findMovieViewModel.changeMovie(movie!!)
+                    }
+
+                    (activity as MainActivity).set_find_movie_binding(binding, moviesAsync, findMovieViewModel, movieIndex)
+
+                    return root
+                }
+            }
+        }
+        catch (exception: Exception)
+        {
+            print("no arg")
+        }
+
+
+
+
         var moviesInDb = false
         doAsync {
             // Get the student list from database
@@ -87,20 +120,10 @@ class FindMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
 
-        binding.showMovie.setOnClickListener(){
-            moviesAsync.getTopRatedMovies(findMovieViewModel)
-        }
-
-        binding.nextButton.setOnClickListener(){
-            movieIndex++
-            moviesAsync.getMovieDetails(findMovieViewModel, movieIndex)
-        }
-
-        binding.prevButton.setOnClickListener(){
-            movieIndex--
-            moviesAsync.getMovieDetails(findMovieViewModel, movieIndex)
+        binding.showMoreButton.setOnClickListener(){
+            findMovieViewModel.getMovieDetailedInfo(navController)
         }
     }
-
 }

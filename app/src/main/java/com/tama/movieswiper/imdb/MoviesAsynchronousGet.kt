@@ -2,7 +2,9 @@ package com.tama.movieswiper.imdb
 
 import android.app.Application
 import android.content.Context
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.navigation.findNavController
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -26,6 +28,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import java.lang.Math.random
+import java.time.LocalDate
 
 class MoviesAsynchronousGet(application: Application) {
     private val client = OkHttpClient()
@@ -103,14 +106,15 @@ class MoviesAsynchronousGet(application: Application) {
             viewModel.changeToRandomMovie()
         }
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     fun loadNewMovies(viewModel: FindMovieViewModel, currentUser: FirebaseUser?) {
         var i = 0
 
         var likedGenresIndex = 0
         var unlikedGenresIndex = 0
 
-        var likedGenres = MutableList<Int>(3, init = { i -> 0 })
-        var dislikedGenres = MutableList<Int>(3, init = { i -> 0 })
+        var likedGenres = MutableList<Int>(2, init = { i -> 0 })
+        var dislikedGenres = MutableList<Int>(2, init = { i -> 0 })
 
         val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
@@ -176,29 +180,29 @@ class MoviesAsynchronousGet(application: Application) {
 
                         }
 
-                            if (genre.value.toString().toInt() > 68 && likedGenresIndex < 2) {
-                                when (genre.key) {
-                                    "action" -> likedGenres[likedGenresIndex++] = 28
-                                    "adventure" -> likedGenres[likedGenresIndex++] = 12
-                                    "animation" -> likedGenres[likedGenresIndex++] = 16
-                                    "comedy" -> likedGenres[likedGenresIndex++] = 35
-                                    "crime" -> likedGenres[likedGenresIndex++] = 80
-                                    "documentary" -> likedGenres[likedGenresIndex++] = 99
-                                    "drama" -> likedGenres[likedGenresIndex++] = 18
-                                    "family" -> likedGenres[likedGenresIndex++] = 10751
-                                    "fantasy" -> likedGenres[likedGenresIndex++] = 14
-                                    "history" -> likedGenres[likedGenresIndex++] = 36
-                                    "horror" -> likedGenres[likedGenresIndex++] = 27
-                                    "music" -> likedGenres[likedGenresIndex++] = 10402
-                                    "mystery" -> likedGenres[likedGenresIndex++] = 9648
-                                    "romance" -> likedGenres[likedGenresIndex++] = 10749
-                                    "sci-fi" -> likedGenres[likedGenresIndex++] = 878
-                                    "tv_movie" -> likedGenres[likedGenresIndex++] = 10770
-                                    "thriller" -> likedGenres[likedGenresIndex++] = 53
-                                    "war" -> likedGenres[likedGenresIndex++] = 10752
-                                    "western" -> likedGenres[likedGenresIndex++] = 37
-                                }
+                        if (genre.value.toString().toInt() > 68 && likedGenresIndex < 2) {
+                            when (genre.key) {
+                                "action" -> likedGenres[likedGenresIndex++] = 28
+                                "adventure" -> likedGenres[likedGenresIndex++] = 12
+                                "animation" -> likedGenres[likedGenresIndex++] = 16
+                                "comedy" -> likedGenres[likedGenresIndex++] = 35
+                                "crime" -> likedGenres[likedGenresIndex++] = 80
+                                "documentary" -> likedGenres[likedGenresIndex++] = 99
+                                "drama" -> likedGenres[likedGenresIndex++] = 18
+                                "family" -> likedGenres[likedGenresIndex++] = 10751
+                                "fantasy" -> likedGenres[likedGenresIndex++] = 14
+                                "history" -> likedGenres[likedGenresIndex++] = 36
+                                "horror" -> likedGenres[likedGenresIndex++] = 27
+                                "music" -> likedGenres[likedGenresIndex++] = 10402
+                                "mystery" -> likedGenres[likedGenresIndex++] = 9648
+                                "romance" -> likedGenres[likedGenresIndex++] = 10749
+                                "sci-fi" -> likedGenres[likedGenresIndex++] = 878
+                                "tv_movie" -> likedGenres[likedGenresIndex++] = 10770
+                                "thriller" -> likedGenres[likedGenresIndex++] = 53
+                                "war" -> likedGenres[likedGenresIndex++] = 10752
+                                "western" -> likedGenres[likedGenresIndex++] = 37
                             }
+                        }
                         if (genre.value.toString().toInt() < 32 && unlikedGenresIndex < 2) {
                             when (genre.key) {
                                 "action" -> dislikedGenres[unlikedGenresIndex++] = 28
@@ -231,35 +235,54 @@ class MoviesAsynchronousGet(application: Application) {
         }
 
         runBlocking {
-            delay(500)
+            delay(1500)
             TMDb.init("1373e6da8f4f694cc751405fd528bb62")
             var movieBuilder : Discover.MovieBuilder
-            if(likedGenresIndex > 2 && unlikedGenresIndex > 2)
-                movieBuilder = Discover.MovieBuilder().sortBy(Discover.SortBy.POPULARITY_DESC).withGenres(likedGenres).withoutGenres(dislikedGenres)
+            if(likedGenresIndex > 1 && unlikedGenresIndex > 1)
+                movieBuilder = Discover.MovieBuilder().sortBy(Discover.SortBy.POPULARITY_DESC).withGenres(likedGenres).withoutGenres(dislikedGenres).primaryReleaseDateLessEqual(
+                    LocalDate.now())
             else
             {
                 var likedList = List<Int>(1, {i -> maximumGenre})
                 var dislikedList = List<Int>(1, {i -> minimumGenre})
 
                 movieBuilder = Discover.MovieBuilder().sortBy(Discover.SortBy.POPULARITY_DESC).
-                withGenres(likedList).withoutGenres(dislikedList)
+                withGenres(likedList).withoutGenres(dislikedList).primaryReleaseDateLessEqual(
+                    LocalDate.now())
             }
 
-
-            var pageNumber = (1..20).random()
-            when (val response = TMDb.discoverService.movie(page = pageNumber, options = movieBuilder)) {
+            when (val response = TMDb.discoverService.movie(options = movieBuilder)) {
                 // Type: NetworkResponse<TmdbPage<TmdbShow.Slim>, TmdbError.DefaultError>
                 is NetworkResponse.Success -> {
-                    val searchPage: TmdbPage<TmdbMovie.Slim> = response.body
-                    movies = Array<Int>(searchPage.results.size, { i -> 0 })
-                    for(result in searchPage.results)
-                    {
-                        movies[i] = result.id
-                        i++
-                    }
-                    for(i in 0..(movies.size - 1))
-                    {
-                        getMovieDetails(viewModel, i)
+                    var searchPage: TmdbPage<TmdbMovie.Slim> = response.body
+                    var pageNumber : Int = (1..searchPage.totalPages / 2).random()
+                    when (val response = TMDb.discoverService.movie(page = pageNumber, options = movieBuilder)) {
+                        // Type: NetworkResponse<TmdbPage<TmdbShow.Slim>, TmdbError.DefaultError>
+                        is NetworkResponse.Success -> {
+                            searchPage = response.body
+                            movies = Array<Int>(searchPage.results.size, { i -> 0 })
+                            for(result in searchPage.results)
+                            {
+                                movies[i] = result.id
+                                i++
+                            }
+                            for(i in 0..(movies.size - 1))
+                            {
+                                getMovieDetails(viewModel, i)
+                            }
+                        }
+                        is NetworkResponse.ServerError -> {
+                            /*val errorBody: TmdbErrorResponse = response.body*/
+                            println("ServerError: Message")
+                        }
+                        is NetworkResponse.NetworkError -> {
+                            val error: IOException = response.error
+                            println("NetworkError: Message = ${error.message}")
+                        }
+                        is NetworkResponse.UnknownError -> {
+                            val error: Throwable = response.error
+                            println("UnknownError: Message = ${error.message}")
+                        }
                     }
                 }
                 is NetworkResponse.ServerError -> {

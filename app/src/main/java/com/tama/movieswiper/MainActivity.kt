@@ -50,6 +50,8 @@ import org.jetbrains.anko.uiThread
 import retrofit2.Retrofit
 import java.io.IOException
 import kotlin.system.exitProcess
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
 
 
 class MainActivity : AppCompatActivity() {
@@ -69,6 +71,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val policy = ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
 
         supportActionBar?.hide()
 
@@ -96,12 +101,11 @@ class MainActivity : AppCompatActivity() {
             // Get the student list from database
             //mDb.basicMovieDao().clear()
         }
+        get_user_genre_preferences()
 
 
         var auth = Firebase.auth
         val currentUser = auth.currentUser
-
-        get_user_genre_preferences()
 
         if(currentUser != null){
             show_navView(true)
@@ -114,32 +118,37 @@ class MainActivity : AppCompatActivity() {
         var auth = Firebase.auth
         val currentUser = auth.currentUser
 
-        val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
+        runBlocking {
+            delay(500)
+            val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
-        database.child("users").child(currentUser?.uid.toString()).child("genres").get().addOnSuccessListener {
-            currentUserPreferences.action =         it.child("action").value.toString().toInt()
-            currentUserPreferences.adventure =      it.child("adventure").value.toString().toInt()
-            currentUserPreferences.animation =      it.child("animation").value.toString().toInt()
-            currentUserPreferences.comedy =         it.child("comedy").value.toString().toInt()
-            currentUserPreferences.crime =          it.child("crime").value.toString().toInt()
-            currentUserPreferences.documentary =    it.child("documentary").value.toString().toInt()
-            currentUserPreferences.drama =          it.child("drama").value.toString().toInt()
-            currentUserPreferences.family =         it.child("family").value.toString().toInt()
-            currentUserPreferences.fantasy =        it.child("fantasy").value.toString().toInt()
-            currentUserPreferences.history =        it.child("history").value.toString().toInt()
-            currentUserPreferences.horror =         it.child("horror").value.toString().toInt()
-            currentUserPreferences.music =          it.child("music").value.toString().toInt()
-            currentUserPreferences.mystery =        it.child("mystery").value.toString().toInt()
-            currentUserPreferences.romance =        it.child("romance").value.toString().toInt()
-            currentUserPreferences.sci_fi =         it.child("sci_fi").value.toString().toInt()
-            currentUserPreferences.tv_movie =       it.child("tv_movie").value.toString().toInt()
-            currentUserPreferences.thriller =       it.child("thriller").value.toString().toInt()
-            currentUserPreferences.war =            it.child("war").value.toString().toInt()
-            currentUserPreferences.western =        it.child("western").value.toString().toInt()
+            database.child("users").child(currentUser?.uid.toString()).child("genres").get().addOnSuccessListener {
+                currentUserPreferences.action =         it.child("action").value.toString().toInt()
+                currentUserPreferences.adventure =      it.child("adventure").value.toString().toInt()
+                currentUserPreferences.animation =      it.child("animation").value.toString().toInt()
+                currentUserPreferences.comedy =         it.child("comedy").value.toString().toInt()
+                currentUserPreferences.crime =          it.child("crime").value.toString().toInt()
+                currentUserPreferences.documentary =    it.child("documentary").value.toString().toInt()
+                currentUserPreferences.drama =          it.child("drama").value.toString().toInt()
+                currentUserPreferences.family =         it.child("family").value.toString().toInt()
+                currentUserPreferences.fantasy =        it.child("fantasy").value.toString().toInt()
+                currentUserPreferences.history =        it.child("history").value.toString().toInt()
+                currentUserPreferences.horror =         it.child("horror").value.toString().toInt()
+                currentUserPreferences.music =          it.child("music").value.toString().toInt()
+                currentUserPreferences.mystery =        it.child("mystery").value.toString().toInt()
+                currentUserPreferences.romance =        it.child("romance").value.toString().toInt()
+                currentUserPreferences.sci_fi =         it.child("sci_fi").value.toString().toInt()
+                currentUserPreferences.tv_movie =       it.child("tv_movie").value.toString().toInt()
+                currentUserPreferences.thriller =       it.child("thriller").value.toString().toInt()
+                currentUserPreferences.war =            it.child("war").value.toString().toInt()
+                currentUserPreferences.western =        it.child("western").value.toString().toInt()
 
-        }.addOnFailureListener{
-            Log.e("firebase", "Error getting data", it)
+            }.addOnFailureListener{
+                get_user_genre_preferences()
+                Log.e("firebase", "Error getting data", it)
+            }
         }
+
     }
 
     fun show_navView(state: Boolean)
@@ -445,12 +454,12 @@ class MainActivity : AppCompatActivity() {
         }
         else
         {
-            addition = -1
+            addition = -2
         }
 
         when (genre)
         {
-            "Action" -> currentUserPreferences.action += addition
+            "Action" -> currentUserPreferences.action +=  addition
             "Adventure" -> currentUserPreferences.adventure += addition
             "Animation" -> currentUserPreferences.animation += addition
             "Comedy" -> currentUserPreferences.comedy += addition
@@ -488,6 +497,7 @@ class MainActivity : AppCompatActivity() {
                 currentMovie.visited = 1;
                 currentMovie.liked = 0;
                 runBlocking {
+
                     val job: Job = launch(context = Dispatchers.Default) {
                         println("[${Thread.currentThread().name}] Launched coroutine")
                         mDb.basicMovieDao().update(currentMovie)
@@ -498,12 +508,13 @@ class MainActivity : AppCompatActivity() {
                     println("[${Thread.currentThread().name}] Finished coroutine")
                 }
 
-                for (i in 0 until currentMovieGenres.size) {
+                var auth = Firebase.auth
+                val currentUser = auth.currentUser
+                for (i in 0 until currentMovieGenres.size - 1) {
                     val item = currentMovieGenres[i]
                     update_preferences(item.toString(), false)
                 }
-                var auth = Firebase.auth
-                val currentUser = auth.currentUser
+                get_user_genre_preferences()
 
                 val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
                 database.child("users").child(currentUser?.uid.toString()).child("genres").setValue(currentUserPreferences)
@@ -530,6 +541,7 @@ class MainActivity : AppCompatActivity() {
             override fun onSwipeRight() {
                 super.onSwipeRight()
                 //LIKE
+
                 mDb = MovieDatabase.getInstance(applicationContext)!!
                 currentMovie.visited = 1;
                 currentMovie.liked = 1
@@ -544,13 +556,14 @@ class MainActivity : AppCompatActivity() {
                     println("[${Thread.currentThread().name}] Finished coroutine")
                 }
 
+                var auth = Firebase.auth
+                val currentUser = auth.currentUser
 
-                for (i in 0 until currentMovieGenres.size) {
+                for (i in 0 until currentMovieGenres.size - 1) {
                     val item = currentMovieGenres[i]
                     update_preferences(item.toString(), true)
                 }
-                var auth = Firebase.auth
-                val currentUser = auth.currentUser
+                get_user_genre_preferences()
 
                 val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
                 database.child("users").child(currentUser?.uid.toString()).child("genres").setValue(currentUserPreferences)

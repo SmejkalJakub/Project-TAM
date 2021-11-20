@@ -47,4 +47,9 @@
         android:name="com.tama.movieswiper.ui.groups.GroupDetailFragment"
         android:label="group_detail_fragment"
         tools:layout="@layout/group_detail_fragment" />
+    <fragment
+        android:id="@+id/navigation_movie_detail"
+        android:name="com.tama.movieswiper.ui.find_movie.details.MovieDetailFragment"
+        android:label="movie_detail_fragment"
+        tools:layout="@layout/movie_detail_fragment" />
 </navigation>
