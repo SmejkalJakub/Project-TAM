@@ -101,11 +101,15 @@ class MainActivity : AppCompatActivity() {
             // Get the student list from database
             //mDb.basicMovieDao().clear()
         }
-        get_user_genre_preferences()
+
 
 
         var auth = Firebase.auth
         val currentUser = auth.currentUser
+
+        if(currentUser != null){
+            get_user_genre_preferences()
+        }
 
         if(currentUser != null){
             show_navView(true)

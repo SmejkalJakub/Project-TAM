@@ -95,9 +95,6 @@ class FindMovieFragment : Fragment() {
             print("no arg")
         }
 
-
-
-
         var moviesInDb = false
         doAsync {
             // Get the student list from database
