@@ -91,6 +91,58 @@
 
         <TableRow
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/logosLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/netflixLogo"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:src="@tools:sample/avatars" />
+
+                <ImageView
+                    android:id="@+id/hboLogo"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:src="@tools:sample/avatars" />
+
+                <ImageView
+                    android:id="@+id/amazonLogo"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:src="@tools:sample/avatars" />
+
+                <ImageView
+                    android:id="@+id/appletv_logo"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:src="@tools:sample/avatars" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/moreButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_weight="0"
+                android:text="Where To Watch"
+                android:textSize="8sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView

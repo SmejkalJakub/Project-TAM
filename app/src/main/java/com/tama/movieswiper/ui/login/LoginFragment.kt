@@ -44,6 +44,6 @@ class LoginFragment : Fragment() {
         navController = Navigation.findNavController(view)
 
         binding.signUpButton.setOnClickListener { loginViewModel.switch_to_sign_up(navController) }
-        binding.loginButton.setOnClickListener { loginViewModel.login(binding.loginEmail.text.toString(), binding.loginPassword.text.toString()) }
+        binding.loginButton.setOnClickListener { loginViewModel.login(binding.loginEmail.text.toString(), binding.loginPassword.text.toString())  }
     }
 }

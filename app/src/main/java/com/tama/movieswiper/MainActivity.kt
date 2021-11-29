@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
         doAsync {
             // Get the student list from database
-            //mDb.basicMovieDao().clear()
+            mDb.basicMovieDao().clear()
         }
 
 
@@ -173,6 +173,13 @@ class MainActivity : AppCompatActivity() {
     {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
+        if(user.password == "" || user.passwordConfirmation == "" || user.email == "")
+        {
+            Toast.makeText(baseContext, "Please fill in the user data.",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+
         if(user.password != user.passwordConfirmation)
         {
             Toast.makeText(baseContext, "Password Mismatch",
@@ -206,6 +213,14 @@ class MainActivity : AppCompatActivity() {
     {
         val user = Firebase.auth.currentUser
 
+        if(userModel.email == "" || userModel.password == "" || userModel.passwordConfirmation == "")
+        {
+            Toast.makeText(baseContext, "Please fill in the user data.",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
         if(userModel.password != userModel.passwordConfirmation)
         {
             Toast.makeText(baseContext, "Password Mismatch",
@@ -229,20 +244,35 @@ class MainActivity : AppCompatActivity() {
 
     fun join_group(groupName: String)
     {
+        if(groupName == "")
+        {
+            Toast.makeText(baseContext, "Please fill in the group name.",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
         val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
         database.child("groups").child(groupName).get().addOnSuccessListener {
 
             // Group does not exist
-            if(it.value == null)
+            if(it.value == null) {
+                Toast.makeText(
+                    baseContext, "Group does not exist",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@addOnSuccessListener
+            }
 
             val currentUser = Firebase.auth.currentUser
 
             // User already in the group
-            if(it.child("users").child(currentUser?.uid.toString()).value != null)
+            if(it.child("users").child(currentUser?.uid.toString()).value != null) {
+                Toast.makeText(
+                    baseContext, "You are a member of this group already.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@addOnSuccessListener
-
+            }
             database.child("groups").child(groupName).child("users").
             child(currentUser?.uid.toString()).setValue(User(currentUser?.uid.toString(), currentUser?.email))
 
@@ -373,6 +403,13 @@ class MainActivity : AppCompatActivity() {
 
     fun create_group(groupName: String)
     {
+        if(groupName == "")
+        {
+            Toast.makeText(baseContext, "Please fill in the group name.",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
         database.child("groups").child(groupName).get().addOnSuccessListener {
@@ -392,6 +429,15 @@ class MainActivity : AppCompatActivity() {
                 val navController = findNavController(R.id.nav_host_fragment_activity_main)
                 navController.navigate(R.id.navigation_groups)
             }
+            else
+            {
+                Toast.makeText(
+                    baseContext, "Group name not available.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@addOnSuccessListener
+
+            }
         }.addOnFailureListener{
             Log.e("firebase", "Error getting data", it)
         }
@@ -400,6 +446,14 @@ class MainActivity : AppCompatActivity() {
     fun auth_user(user: UserModel)
     {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        if(user.email == "" || user.password == "")
+        {
+            Toast.makeText(baseContext, "Please fill in the user data.",
+                Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
         user.auth.signInWithEmailAndPassword(user.email, user.password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {

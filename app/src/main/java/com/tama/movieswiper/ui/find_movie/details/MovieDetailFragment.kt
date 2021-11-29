@@ -18,6 +18,14 @@ import com.tama.movieswiper.databinding.MovieDetailFragmentBinding
 import com.tama.movieswiper.imdb.MoviesAsynchronousGet
 import com.tama.movieswiper.ui.find_movie.FindMovieViewModel
 import org.jetbrains.anko.doAsync
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import java.io.IOException
+import java.io.InputStream
+import java.net.URL
+
 
 class MovieDetailFragment : Fragment() {
 
@@ -29,6 +37,8 @@ class MovieDetailFragment : Fragment() {
     private lateinit var mDb: MovieDatabase
     private lateinit var navController: NavController
     private lateinit var movieId : String
+
+    private lateinit var watchLink : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +76,59 @@ class MovieDetailFragment : Fragment() {
             binding.genres.text = genres
         })
 
+        movieDetailViewModel.watchLink.observe(viewLifecycleOwner, Observer { link ->
+            watchLink = link
+        })
+
+        binding.moreButton.setOnClickListener(){
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(watchLink))
+            startActivity(browserIntent)
+        }
+
+        var imageUrl = "https://image.tmdb.org/t/p/w92/q6tl6Ib6X5FT80RMlcDbexIo4St.jpg"
+
+        val w: Int = 92
+        val h: Int = 92
+        val conf = Bitmap.Config.ARGB_8888 // see other conf types
+        var bitmap: Bitmap = Bitmap.createBitmap(w, h, conf)
+
+        var inputStream: InputStream? = null
+
+        try {
+            inputStream = URL(imageUrl).openStream()
+            bitmap = BitmapFactory.decodeStream(inputStream)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        binding.appletvLogo.setImageBitmap(bitmap)
+
+        imageUrl = "https://image.tmdb.org/t/p/w92/9A1JSVmSxsyaBK4SUFsYVqbAYfW.jpg"
+        try {
+            inputStream = URL(imageUrl).openStream()
+            bitmap = BitmapFactory.decodeStream(inputStream)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        binding.netflixLogo.setImageBitmap(bitmap)
+
+        imageUrl = "https://image.tmdb.org/t/p/w92/3zw07sM5b9FWcB1QXXt3uLpjn9r.jpg"
+        try {
+            inputStream = URL(imageUrl).openStream()
+            bitmap = BitmapFactory.decodeStream(inputStream)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        binding.hboLogo.setImageBitmap(bitmap)
+
+        imageUrl = "https://image.tmdb.org/t/p/w92/68MNrwlkpF7WnmNPXLah69CR5cb.jpg"
+        try {
+            inputStream = URL(imageUrl).openStream()
+            bitmap = BitmapFactory.decodeStream(inputStream)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        binding.amazonLogo.setImageBitmap(bitmap)
+
         val root: View = binding.root
 
         return root
@@ -73,8 +136,14 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.logosLayout.visibility = View.GONE
+        binding.netflixLogo.visibility = View.GONE
+        binding.appletvLogo.visibility = View.GONE
+        binding.hboLogo.visibility = View.GONE
+
         navController = Navigation.findNavController(view)
-        movieDetailViewModel.getMovieDetailedInfo(movieId!!)
+        movieDetailViewModel.getMovieDetailedInfo(movieId!!, binding)
 
         binding.backToMovieButton.setOnClickListener(){
             val bundle = bundleOf("id" to movieId)

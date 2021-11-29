@@ -1,6 +1,7 @@
 package com.tama.movieswiper.ui.login
 
 import Event
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
@@ -27,6 +28,8 @@ class LoginViewModel : ViewModel() {
             loginSuccesful.postValue(Event(true))
             return
         }
+
+
 
         loginUser.postValue(Event(UserModel(loginEmail, loginPassword, null, auth)))
     }
