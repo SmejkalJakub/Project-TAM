@@ -16,6 +16,22 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
+            <TextView
+                android:id="@+id/groupNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Group Name"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
@@ -29,6 +45,18 @@
                     android:layout_height="wrap_content"
                     android:text="asdawdawdasdhjashdkjashdkjashd" />
             </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/showRecommendationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recommend a Movie" />
         </TableRow>
 
         <TableRow

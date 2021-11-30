@@ -39,10 +39,10 @@ class GroupDetailFragment : Fragment() {
         var name = arguments?.getString("name")
 
         (activity as MainActivity).show_group_users(binding, arguments?.getString("name"))
+        binding.groupNameText.text = arguments?.getString("name")
 
         binding.deleteButton.setOnClickListener {(activity as MainActivity).delete_group(name)}
         binding.leaveGroupButton.setOnClickListener {(activity as MainActivity).leave_group(name)}
-
 
         return root
     }
@@ -52,5 +52,6 @@ class GroupDetailFragment : Fragment() {
         navController = Navigation.findNavController(view)
 
         binding.backToGroupsButton.setOnClickListener { navController.navigate(R.id.navigation_groups) }
+        binding.showRecommendationButton.setOnClickListener { groupDetailViewModel.showRecommendation() }
     }
 }
