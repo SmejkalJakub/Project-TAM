@@ -124,7 +124,7 @@ class FindMovieViewModel(application: Application) : AndroidViewModel(applicatio
     {
         var id = currentMovie.value?.movieId
 
-        val bundle = bundleOf("id" to id)
+        val bundle = bundleOf(Pair("id", id), Pair("fromGroup", false))
         navController.navigate(R.id.navigation_movie_detail, bundle)
     }
 

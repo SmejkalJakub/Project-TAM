@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.tama.movieswiper.MainActivity
@@ -44,14 +45,40 @@ class GroupDetailFragment : Fragment() {
         binding.deleteButton.setOnClickListener {(activity as MainActivity).delete_group(name)}
         binding.leaveGroupButton.setOnClickListener {(activity as MainActivity).leave_group(name)}
 
+        binding.showRecommendationButton.setOnClickListener { groupDetailViewModel.showRecommendation(name) }
+
+        groupDetailViewModel.movieName.observe(viewLifecycleOwner, Observer { name ->
+            binding.movieTitleGroup.text = name
+        })
+
+        groupDetailViewModel.movieDescription.observe(viewLifecycleOwner, Observer { description ->
+            binding.movieDescriptionGroup.text = description
+        })
+
+        groupDetailViewModel.movieRating.observe(viewLifecycleOwner, Observer { rating ->
+            binding.movieRatingGroup.text = rating
+        })
+
+        groupDetailViewModel.moviePoster.observe(viewLifecycleOwner, Observer { poster ->
+            binding.moviePictureGroup.setImageBitmap(poster)
+        })
+
+        groupDetailViewModel.movieRuntime.observe(viewLifecycleOwner, Observer { runtime ->
+            binding.movieRuntimeGroup.text = runtime
+        })
+
+
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        groupDetailViewModel.setNavigationController(navController, binding)
 
         binding.backToGroupsButton.setOnClickListener { navController.navigate(R.id.navigation_groups) }
-        binding.showRecommendationButton.setOnClickListener { groupDetailViewModel.showRecommendation() }
+        binding.showMoreButtonGroup.setOnClickListener(){
+            groupDetailViewModel.getMovieDetailedInfo()
+        }
     }
 }

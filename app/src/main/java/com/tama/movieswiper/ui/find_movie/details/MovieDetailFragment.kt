@@ -40,6 +40,8 @@ class MovieDetailFragment : Fragment() {
 
     private lateinit var watchLink : String
 
+    var fromGroup : Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,6 +53,8 @@ class MovieDetailFragment : Fragment() {
             inflater, container, false)
 
         movieId = arguments?.getString("id")!!
+        fromGroup = arguments?.getBoolean("fromGroup")!!
+
 
         movieDetailViewModel.movieName.observe(viewLifecycleOwner, Observer { name ->
             binding.movieDetailTitle.text = name
@@ -145,10 +149,18 @@ class MovieDetailFragment : Fragment() {
         navController = Navigation.findNavController(view)
         movieDetailViewModel.getMovieDetailedInfo(movieId!!, binding)
 
-        binding.backToMovieButton.setOnClickListener(){
-            val bundle = bundleOf("id" to movieId)
-            navController.navigate(R.id.navigation_find_movie, bundle)
+        if(fromGroup)
+        {
+            binding.backToMovieButton.setOnClickListener(){
+                navController.navigate(R.id.navigation_groups)
+            }
+        }
+        else
+        {
+            binding.backToMovieButton.setOnClickListener(){
+                val bundle = bundleOf("id" to movieId)
+                navController.navigate(R.id.navigation_find_movie, bundle)
+            }
         }
     }
-
 }

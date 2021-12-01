@@ -3,13 +3,180 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.groups.GroupDetailFragment">
 
     <TableLayout
+        android:id="@+id/movieTableLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000000"
-        android:gravity="center">
+        android:gravity="center"
+        android:translationY="-20dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView2Group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recommended movie"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/moviePictureGroup"
+                app:layout_constraintBottom_toTopOf="@+id/movieDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.46"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="267dp"
+                android:layout_height="240dp"
+                tools:srcCompat="@tools:sample/avatars" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="309dp"
+
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/movieTitleGroup"
+                app:layout_constraintBottom_toTopOf="@+id/moviePicture"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.97"
+                android:layout_width="307dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/actor"
+                android:gravity="fill|fill_horizontal"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="307dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/movieRatingGroup"
+                app:layout_constraintBottom_toTopOf="@+id/showMovie"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/movieDescription"
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:fontFamily="@font/actor"
+                android:lineSpacingExtra="0dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="#DAC7C7"
+                android:textSize="18sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/movieRuntimeGroup"
+                app:layout_constraintBottom_toTopOf="@+id/showMovie"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/movieDescription"
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:fontFamily="@font/actor"
+                android:lineSpacingExtra="0dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="#DAC7C7"
+                android:textSize="12sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="206dp"
+            android:layout_height="1px"
+            android:background="#BDBDBD"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="310dp"
+                android:layout_height="1px"
+                android:layout_span="2"
+                android:text="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:translationY="5dp">
+
+            <TextView
+                android:id="@+id/movieDescriptionGroup"
+                app:layout_constraintBottom_toTopOf="@+id/movieRating"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/moviePicture"
+                android:layout_width="307dp"
+                android:layout_height="65dp"
+                android:fontFamily="@font/actor"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="#C4BABA" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/showMoreButtonGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:translationY="5dp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/groupViewLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:gravity="center"
+        tools:visibility="gone">
 
         <TableRow
             android:layout_width="match_parent"

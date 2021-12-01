@@ -44,7 +44,6 @@ class MovieDetailViewModel : ViewModel() {
             TMDb.init("1373e6da8f4f694cc751405fd528bb62")
 
             when (val response = TMDb.movieService.details(movieIdInt!!, "en")) {
-                // Type: NetworkResponse<TmdbPage<TmdbShow.Slim>, TmdbError.DefaultError>
                 is NetworkResponse.Success -> {
                     foundedMovie = response.body
 
