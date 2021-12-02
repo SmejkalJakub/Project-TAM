@@ -3,122 +3,150 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:padding="30dp">
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000"
-        android:gravity="center">
+        android:orientation="vertical">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
 
             <TextView
-                android:id="@+id/textView6"
-                android:layout_width="172dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/karla_bold"
+                android:text="User profile"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="48sp" />
+        </TableRow>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/profile_email"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/averia_libre"
-                android:gravity="center"
-                android:text="@string/prompt_email"
+                android:fontFamily="@font/karla"
+                android:text="Email"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/profileEmail"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#26FFFFFF"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_edittext"
                 android:ems="10"
-                android:hint="@string/prompt_email"
+                android:fontFamily="@font/karla"
+                android:hint="Enter your email"
                 android:inputType="textEmailAddress"
+                android:minHeight="50dp"
+                android:padding="10dp"
                 android:textColor="#B9B6B6"
-                android:textColorHint="#26FFFFFF" />
-        </TableRow>
+                android:textColorHint="#3ED6D3D3"
+                android:textSize="20sp" />
+        </LinearLayout>
 
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:gravity="center">
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/profile_password"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/averia_libre"
-                android:gravity="center"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/karla"
                 android:text="@string/prompt_password"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/profilePassword"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#26FFFFFF"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_edittext"
                 android:ems="10"
+                android:fontFamily="@font/karla"
                 android:hint="New Password"
                 android:inputType="textPassword"
+                android:minHeight="50dp"
+                android:padding="10dp"
                 android:textColor="#B9B6B6"
-                android:textColorHint="#26FFFFFF" />
-        </TableRow>
+                android:textColorHint="#3ED6D3D3"
+                android:textSize="20sp" />
 
-        <TableRow
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:gravity="center">
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/profile_password_confirmation"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/averia_libre"
-                android:gravity="center"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/karla"
                 android:text="Confirm Password"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/profileConfirmPassword"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#26FFFFFF"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rounded_edittext"
                 android:ems="10"
+                android:fontFamily="@font/karla"
                 android:hint="Confirm New Password"
                 android:inputType="textPassword"
+                android:minHeight="50dp"
+                android:padding="10dp"
                 android:textColor="#B9B6B6"
-                android:textColorHint="#26FFFFFF" />
-        </TableRow>
+                android:textColorHint="#3ED6D3D3"
+                android:textSize="20sp" />
 
-        <TableRow
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/updateButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Update" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/logOutButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Log out" />
-        </TableRow>
 
-    </TableLayout>
+            <Button
+                android:id="@+id/updateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update" />
+        </LinearLayout>
+    </LinearLayout>
+
 </FrameLayout>
