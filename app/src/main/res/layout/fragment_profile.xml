@@ -27,16 +27,13 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/profileEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#26FFFFFF"
-                android:ems="10"
-                android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"
-                android:textColor="#B9B6B6"
-                android:textColorHint="#26FFFFFF" />
+                android:text="User Email"
+                android:textColor="#B9B6B6" />
+
         </TableRow>
 
         <TableRow
