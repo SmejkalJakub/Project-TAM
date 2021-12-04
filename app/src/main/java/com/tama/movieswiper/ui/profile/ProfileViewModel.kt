@@ -22,7 +22,7 @@ class ProfileViewModel() : ViewModel() {
 
     fun updateProfileData(binding: FragmentProfileBinding){
 
-        var email = binding.profileEmail.text.toString()
+        var email = binding.emailProfile.text.toString()
         var password = binding.profilePassword.text.toString()
         var confirmPassword = binding.profileConfirmPassword.text.toString()
 

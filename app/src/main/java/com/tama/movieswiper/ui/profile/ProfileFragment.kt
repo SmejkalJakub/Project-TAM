@@ -57,7 +57,7 @@ class ProfileFragment : Fragment() {
 
     private fun setFragmentTextObservers() {
         profileViewModel.emailLiveData.observe(viewLifecycleOwner, Observer { updatedText ->
-            binding.profileEmail.setText(updatedText)
+            binding.emailProfile.setText(updatedText)
         })
     }
 
