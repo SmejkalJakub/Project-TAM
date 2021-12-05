@@ -67,7 +67,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/profile_password"
+                android:id="@+id/passwordText"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/karla"
@@ -101,7 +101,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/profile_password_confirmation"
+                android:id="@+id/profilePasswordText"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/karla"

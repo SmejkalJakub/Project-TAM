@@ -1,8 +1,10 @@
 package com.tama.movieswiper.ui.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
@@ -17,6 +19,9 @@ import com.google.firebase.ktx.Firebase
 import com.tama.movieswiper.MainActivity
 import com.tama.movieswiper.R
 import com.tama.movieswiper.databinding.FragmentProfileBinding
+import android.widget.Toast
+
+
 
 class ProfileFragment : Fragment() {
 
@@ -64,7 +69,18 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+
+        binding.profilePassword.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                Toast.makeText(activity as MainActivity, "focus loosed", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(activity as MainActivity, "focused", Toast.LENGTH_LONG).show()
+            }
+        }
     }
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
