@@ -11,7 +11,6 @@ class GroupsViewModel : ViewModel() {
 
     fun show_detail(name: String, navController: NavController)
     {
-        var test = name
         val bundle = bundleOf("name" to name)
         navController.navigate(R.id.navigation_group_detail, bundle)
 

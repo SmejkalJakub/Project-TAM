@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -47,5 +48,29 @@ class RegisterFragment : Fragment() {
             binding.registerPassword.text.toString(), binding.confirmPassword.text.toString()) }
         
         binding.backButton.setOnClickListener { registerViewModel.return_to_login(navController) }
+
+        binding.registerEmail.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                binding.registerEmail.setBackgroundResource(R.drawable.rounded_edittext)
+            } else {
+                binding.registerEmail.setBackgroundResource(R.drawable.rounded_edittext_focused)
+            }
+        }
+
+        binding.registerPassword.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                binding.registerPassword.setBackgroundResource(R.drawable.rounded_edittext)
+            } else {
+                binding.registerPassword.setBackgroundResource(R.drawable.rounded_edittext_focused)
+            }
+        }
+
+        binding.confirmPassword.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                binding.confirmPassword.setBackgroundResource(R.drawable.rounded_edittext)
+            } else {
+                binding.confirmPassword.setBackgroundResource(R.drawable.rounded_edittext_focused)
+            }
+        }
     }
 }

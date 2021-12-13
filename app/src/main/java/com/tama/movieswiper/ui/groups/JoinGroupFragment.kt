@@ -44,5 +44,13 @@ class JoinGroupFragment : Fragment() {
         binding.backFromJoinButton.setOnClickListener { joinGroupViewModel.switch_to_group_view(navController) }
         binding.joinButton.setOnClickListener { (activity as MainActivity).join_group(binding.groupNameField.text.toString()) }
 
+        binding.groupNameField.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                binding.groupNameField.setBackgroundResource(R.drawable.rounded_edittext)
+            } else {
+                binding.groupNameField.setBackgroundResource(R.drawable.rounded_edittext_focused)
+            }
+        }
+
     }
 }

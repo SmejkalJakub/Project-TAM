@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -45,5 +46,21 @@ class LoginFragment : Fragment() {
 
         binding.signUpButton.setOnClickListener { loginViewModel.switch_to_sign_up(navController) }
         binding.loginButton.setOnClickListener { loginViewModel.login(binding.loginEmail.text.toString(), binding.loginPassword.text.toString())  }
+
+        binding.loginEmail.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                binding.loginEmail.setBackgroundResource(R.drawable.rounded_edittext)
+            } else {
+                binding.loginEmail.setBackgroundResource(R.drawable.rounded_edittext_focused)
+            }
+        }
+
+        binding.loginPassword.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                binding.loginPassword.setBackgroundResource(R.drawable.rounded_edittext)
+            } else {
+                binding.loginPassword.setBackgroundResource(R.drawable.rounded_edittext_focused)
+            }
+        }
     }
 }

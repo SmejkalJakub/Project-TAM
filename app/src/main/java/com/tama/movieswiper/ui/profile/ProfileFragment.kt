@@ -72,9 +72,17 @@ class ProfileFragment : Fragment() {
 
         binding.profilePassword.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
             if (!hasFocus) {
-                Toast.makeText(activity as MainActivity, "focus loosed", Toast.LENGTH_LONG).show()
+                binding.profilePassword.setBackgroundResource(R.drawable.rounded_edittext)
             } else {
-                Toast.makeText(activity as MainActivity, "focused", Toast.LENGTH_LONG).show()
+                binding.profilePassword.setBackgroundResource(R.drawable.rounded_edittext_focused)
+            }
+        }
+
+        binding.profileConfirmPassword.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                binding.profileConfirmPassword.setBackgroundResource(R.drawable.rounded_edittext)
+            } else {
+                binding.profileConfirmPassword.setBackgroundResource(R.drawable.rounded_edittext_focused)
             }
         }
     }

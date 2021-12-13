@@ -44,6 +44,13 @@ class CreateGroupFragment : Fragment() {
         binding.backFromCreateButton.setOnClickListener { createGroupViewModel.switch_to_group_view(navController) }
         binding.createButton.setOnClickListener { (activity as MainActivity).create_group(binding.createGroupNameField.text.toString()) }
 
+        binding.createGroupNameField.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                binding.createGroupNameField.setBackgroundResource(R.drawable.rounded_edittext)
+            } else {
+                binding.createGroupNameField.setBackgroundResource(R.drawable.rounded_edittext_focused)
+            }
+        }
     }
 
 }
