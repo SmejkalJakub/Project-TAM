@@ -26,6 +26,7 @@ import com.tama.movieswiper.ui.login.UserModel
 import com.tama.movieswiper.ui.profile.ProfileViewModel
 import com.tama.movieswiper.ui.register.RegisterViewModel
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -52,6 +53,7 @@ import java.io.IOException
 import kotlin.system.exitProcess
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
+import android.view.Gravity
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -322,9 +324,11 @@ class MainActivity : AppCompatActivity() {
                 text.setPadding(15,15,15,15)
                 text.textAlignment = View.TEXT_ALIGNMENT_CENTER
 
-                text.setTextColor(Color.DKGRAY)
-                text.setBackgroundColor(Color.WHITE)
+
+                text.setTextAppearance(R.style.TextAppearance_AppCompat_Medium)
+                text.setTextColor(Color.WHITE)
                 text.text = mail
+                text.gravity = Gravity.CENTER
 
                 _binding.linearLayout.addView(text)
             }
@@ -386,13 +390,19 @@ class MainActivity : AppCompatActivity() {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                 )
+
                 params.setMargins(0,0,0,20);
                 button.setLayoutParams(params);
 
                 button.text = name
                 button.textSize = 20.0f
                 button.setPadding(15,15,15,15)
-                button.setBackgroundColor(Color.LTGRAY)
+                button.width = 1000
+                button.height = 150
+                button.gravity = Gravity.CENTER
+                button.setTextAppearance(R.style.TextAppearance_AppCompat_Medium)
+                button.setBackgroundColor(Color.parseColor("#0277BD"))
+                button.setTextColor(Color.WHITE)
 
                 button.setOnClickListener{ groupsViewModel.show_detail(name, findNavController(R.id.nav_host_fragment_activity_main)) }
 
