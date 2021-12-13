@@ -64,9 +64,6 @@ class MovieDetailFragment : Fragment() {
             binding.movieDetailDescription.text = description
         })
 
-        movieDetailViewModel.originalTitle.observe(viewLifecycleOwner, Observer { org_title ->
-            binding.originalTitle.text = org_title
-        })
 
         movieDetailViewModel.moviePoster.observe(viewLifecycleOwner, Observer { poster ->
             binding.movieDetailPicture.setImageBitmap(poster)

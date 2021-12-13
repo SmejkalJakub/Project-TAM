@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="30dp"
+    android:background="#000000"
     tools:context=".ui.find_movie.details.MovieDetailFragment">
 
     <TableLayout
@@ -27,11 +29,13 @@
                     android:id="@+id/movieDetailPicture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="fill|fill_horizontal"
                     tools:src="@tools:sample/avatars" />
 
                 <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:paddingLeft="10dp">
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -47,17 +51,6 @@
                             android:textStyle="bold" />
                     </TableRow>
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/originalTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView"
-                            android:textColor="#FFFFFF" />
-                    </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -83,6 +76,58 @@
                             android:textColor="#FFFFFF" />
                     </TableRow>
 
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingTop="7dp">
+
+                        <LinearLayout
+                            android:id="@+id/logosLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:id="@+id/netflixLogo"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                tools:src="@tools:sample/avatars" />
+
+                            <ImageView
+                                android:id="@+id/hboLogo"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                tools:src="@tools:sample/avatars" />
+
+                            <ImageView
+                                android:id="@+id/amazonLogo"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                tools:src="@tools:sample/avatars" />
+
+                            <ImageView
+                                android:id="@+id/appletv_logo"
+                                android:layout_width="45dp"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                tools:src="@tools:sample/avatars" />
+
+                            <Button
+                                android:id="@+id/moreButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_weight="0"
+                                android:text="OTHERS"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </TableRow>
+
                 </TableLayout>
 
             </LinearLayout>
@@ -92,53 +137,12 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp">
 
-            <LinearLayout
-                android:id="@+id/logosLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:visibility="gone">
 
-                <ImageView
-                    android:id="@+id/netflixLogo"
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    tools:src="@tools:sample/avatars" />
 
-                <ImageView
-                    android:id="@+id/hboLogo"
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    tools:src="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/amazonLogo"
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    tools:src="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/appletv_logo"
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    tools:src="@tools:sample/avatars" />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/moreButton"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_weight="0"
-                android:text="Where To Watch"
-                android:textSize="8sp" />
         </TableRow>
 
         <TableRow
@@ -150,7 +154,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingTop="5dp"
                 android:text="asdawdawdawdawdawdasjdajlkwjdlkasjdliasfiajhsflahjdahwkdlhalkdfhaljfhljashdflakjshdfljkahslkjhfueihsafes"
+                android:textAlignment="textStart"
                 android:textColor="#FFFFFF" />
         </TableRow>
 

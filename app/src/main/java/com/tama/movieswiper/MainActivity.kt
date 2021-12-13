@@ -52,6 +52,7 @@ import java.io.IOException
 import kotlin.system.exitProcess
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
+import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        FirebaseAuth.getInstance().signOut();
         val policy = ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
 
