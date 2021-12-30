@@ -8,6 +8,6 @@
 
 This is a prototype application for the school project. We developed a tinder-like application for the movies.
 
-It uses TMDB and genre preferences to recommend movies to the user.
+It uses TMDB and genre preferences to recommend movies to the user. User can also create or join group to get the recommendation based on the user preferences.
 
-More information in the `documentation.pdf` file.
+More information in the [documentation.pdf](https://github.com/SmejkalJakub/Project-TAM/blob/main/documentation.pdf) file.
