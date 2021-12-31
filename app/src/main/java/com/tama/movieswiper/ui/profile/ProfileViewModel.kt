@@ -13,7 +13,6 @@ class ProfileViewModel() : ViewModel() {
 
     val updateUser = MutableLiveData<Event<UserModel>>()
 
-
     fun init(){
 
         val user = Firebase.auth.currentUser

@@ -23,6 +23,9 @@ import java.net.URL
 
 class MovieDetailViewModel : ViewModel() {
 
+    /**
+    * Mutable live data where the data will be stored
+    */
     val movieName = MutableLiveData<String>()
     val movieDescription = MutableLiveData<String>()
     val originalTitle = MutableLiveData<String>()
@@ -37,6 +40,9 @@ class MovieDetailViewModel : ViewModel() {
 
     lateinit var foundedMovie : TmdbMovie
 
+    /**
+    * Get all the needed data for the detail screen and send it to the View (Fragment)
+    */
     fun getMovieDetailedInfo(movieId: String, binding: MovieDetailFragmentBinding)
     {
         var movieIdInt = movieId.toInt()
@@ -226,6 +232,5 @@ class MovieDetailViewModel : ViewModel() {
                 binding.amazonLogo.visibility = View.VISIBLE
             }
         }
-
     }
 }

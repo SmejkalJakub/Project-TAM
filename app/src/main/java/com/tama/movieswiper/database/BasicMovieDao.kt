@@ -15,16 +15,12 @@ interface BasicMovieDao {
     /**
      * When updating a row with a value already set in a column,
      * replaces the old value with the new one.
-     *
-     * @param night new value to write
      */
     @Update
     fun update(movie: BasicMovie)
 
     /**
-     * Selects and returns the row that matches the supplied start time, which is our key.
-     *
-     * @param key startTimeMilli to match
+     * Selects and returns the row that matches the movieId
      */
     @Query("SELECT * from basic_movies_table WHERE movieId = :key")
     fun get(key: String): BasicMovie?
@@ -39,7 +35,7 @@ interface BasicMovieDao {
     /**
      * Selects and returns all rows in the table,
      *
-     * sorted by start time in descending order.
+     * sorted by movie_rating in descending order.
      */
     @Query("SELECT * FROM basic_movies_table ORDER BY movie_rating DESC")
     fun getAllMovies(): List<BasicMovie>
@@ -48,7 +44,7 @@ interface BasicMovieDao {
     fun getNotSeenMovies(): List<BasicMovie>
 
     /**
-     * Selects and returns the latest night.
+     * Select the best rated movie
      */
     @Query("SELECT * FROM basic_movies_table ORDER BY movieId DESC LIMIT 1")
     suspend fun getTopMovie(): BasicMovie?

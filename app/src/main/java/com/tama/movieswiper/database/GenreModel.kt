@@ -1,3 +1,7 @@
+/**
+* Simple model that will be saved in the Firebase database. Based on this model, the recommendations are selected
+*/
+
 package com.tama.movieswiper.database
 
 data class GenreModel(

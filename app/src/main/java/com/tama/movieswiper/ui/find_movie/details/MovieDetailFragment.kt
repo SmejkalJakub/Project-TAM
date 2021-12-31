@@ -55,7 +55,9 @@ class MovieDetailFragment : Fragment() {
         movieId = arguments?.getString("id")!!
         fromGroup = arguments?.getBoolean("fromGroup")!!
 
-
+        /**
+        * Observers for all the movie detail data
+        */  
         movieDetailViewModel.movieName.observe(viewLifecycleOwner, Observer { name ->
             binding.movieDetailTitle.text = name
         })
@@ -63,7 +65,6 @@ class MovieDetailFragment : Fragment() {
         movieDetailViewModel.movieDescription.observe(viewLifecycleOwner, Observer { description ->
             binding.movieDetailDescription.text = description
         })
-
 
         movieDetailViewModel.moviePoster.observe(viewLifecycleOwner, Observer { poster ->
             binding.movieDetailPicture.setImageBitmap(poster)

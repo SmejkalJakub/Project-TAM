@@ -45,6 +45,9 @@ class FindMovieViewModel(application: Application) : AndroidViewModel(applicatio
 
     var loaded: Boolean = false
 
+    /**
+    * Save movie info to the in memory database so it will not be shown again
+    */
     fun saveMovieToDb(movieId: Int, movieData: TmdbMovie)
     {
         mDb = MovieDatabase.getInstance(getApplication<Application>().applicationContext)!!
@@ -91,6 +94,9 @@ class FindMovieViewModel(application: Application) : AndroidViewModel(applicatio
         })
     }
 
+    /**
+    * Change to a new not visited movie
+    */
     fun changeMovie(movie: BasicMovie)
     {
         val w: Int = 150
@@ -120,6 +126,9 @@ class FindMovieViewModel(application: Application) : AndroidViewModel(applicatio
         currentMovie.postValue(movie)
     }
 
+    /**
+    * Move to movie detail and show the detailed info
+    */
     fun getMovieDetailedInfo(navController: NavController)
     {
         var id = currentMovie.value?.movieId
@@ -128,6 +137,9 @@ class FindMovieViewModel(application: Application) : AndroidViewModel(applicatio
         navController.navigate(R.id.navigation_movie_detail, bundle)
     }
 
+    /**
+    * Select random movie
+    */
     fun changeToRandomMovie()
     {
         mDb = MovieDatabase.getInstance(getApplication<Application>().applicationContext)!!

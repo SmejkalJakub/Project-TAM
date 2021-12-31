@@ -1,3 +1,12 @@
+/**
+* This code enables to get gestures for the swipe and other touch events.
+  Code from: https://stackoverflow.com/questions/60728621/implement-swipe-gesture-in-kotlin
+  
+*/
+
+
+
+
 package com.tama.movieswiper
 import android.content.Context
 import android.view.GestureDetector

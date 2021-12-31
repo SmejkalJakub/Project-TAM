@@ -1,3 +1,7 @@
+/**
+* Group model with some necessary information
+*/
+
 package com.tama.movieswiper.database
 
 data class Group(

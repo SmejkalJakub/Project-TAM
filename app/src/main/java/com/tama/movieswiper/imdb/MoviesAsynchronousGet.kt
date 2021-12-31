@@ -30,9 +30,11 @@ import java.io.IOException
 import java.lang.Math.random
 import java.time.LocalDate
 
+  
+/**
+* Get all the movie information from the TMDB
+*/
 class MoviesAsynchronousGet(application: Application) {
-    private val client = OkHttpClient()
-
     var movies = arrayOf<Int>()
     private lateinit var mDb:MovieDatabase
 
@@ -40,8 +42,10 @@ class MoviesAsynchronousGet(application: Application) {
 
     private var context: Context? = application
 
+    /**
+    * Get movie detail for the specified movie (description, rating, etc.)
+    */
     fun getMovieDetails(viewModel: FindMovieViewModel, movieIndex: Int) {
-
         var movieId = movies[movieIndex]
         runBlocking {
             TMDb.init("1373e6da8f4f694cc751405fd528bb62")
@@ -69,6 +73,9 @@ class MoviesAsynchronousGet(application: Application) {
         }
     }
 
+    /**
+    * Get top rated movies in the TMDB, this method is called for the first few movies. After that it is decided based on the user preferences
+    */
     fun getTopRatedMovies(viewModel: FindMovieViewModel) {
 
         var i = 0

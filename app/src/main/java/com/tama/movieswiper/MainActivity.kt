@@ -57,20 +57,25 @@ import android.view.Gravity
 import com.google.firebase.auth.FirebaseAuth
 
 
+/**
+* Main Activity for the application.
+*/
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    var movieIndex: Int = 0
-
+    // List of genres for the current movie
     lateinit var currentMovieGenres : List<String>
+
+    // Instance of current movie shown on the screen
     var currentMovie = BasicMovie()
 
+    // Instance of all the genres for current user
     var currentUserPreferences = GenreModel()
+
     private lateinit var mDb:MovieDatabase
 
     var addingMovies = false;
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,14 +105,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
-        doAsync {
-            // Get the student list from database
-            mDb.basicMovieDao().clear()
-        }
-
-
-
         var auth = Firebase.auth
         val currentUser = auth.currentUser
 
@@ -121,6 +118,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+    * Get user genre preferences from the Firebase database so the app can decide based on them
+    */
     fun get_user_genre_preferences()
     {
         var auth = Firebase.auth
@@ -156,9 +156,11 @@ class MainActivity : AppCompatActivity() {
                 Log.e("firebase", "Error getting data", it)
             }
         }
-
     }
 
+    /**
+    * Show/hide navigation based on the screen (login/register = hide, rest of the app = show)
+    */
     fun show_navView(state: Boolean)
     {
         if(state)
@@ -173,6 +175,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+    * Create user in the database based on the inputed data
+    */
     fun create_user(user: UserModel)
     {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -213,6 +218,9 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
+    /**
+    * Update user in the database based on the inputed data
+    */
     fun update_user(userModel: UserModel)
     {
         val user = Firebase.auth.currentUser
@@ -246,6 +254,9 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
+    /**
+    * Join group with the given name (if it exists)
+    */
     fun join_group(groupName: String)
     {
         if(groupName == "")
@@ -290,6 +301,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+    * List the users of the selected group
+    */
     fun show_group_users(_binding: GroupDetailFragmentBinding, groupName: String?)
     {
         val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
@@ -337,6 +351,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+    * Leave selected group
+    */
     fun leave_group(groupName: String?)
     {
         val currentUser = Firebase.auth.currentUser
@@ -355,6 +372,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+    * Delete selected group and delete all entries from the database
+    */
     fun delete_group(groupName: String?)
     {
         val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
@@ -375,7 +395,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // FIX THIS FOR MANY GROUPS
+    /**
+    * Add button for each group that the user is in
+    */
     fun add_button(_binding: GroupsFragmentBinding, groupsViewModel: GroupsViewModel)
     {
         val database = Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
@@ -413,6 +435,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+    * Create group with given name (if it does not exist)
+    */
     fun create_group(groupName: String)
     {
         if(groupName == "")
@@ -455,6 +480,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+    * Authenticate user using Firebase authentication
+    */
     fun auth_user(user: UserModel)
     {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -480,6 +508,9 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
+    /**
+    * Set observers for the login fragment
+    */
     fun set_login_observer(loginViewModel: LoginViewModel)
     {
         loginViewModel.loginSuccesful.observe(this, Observer { event ->
@@ -495,6 +526,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    /**
+    * Set observers for the profile fragment
+    */
     fun set_profile_observer(profileViewModel: ProfileViewModel)
     {
         profileViewModel.updateUser.observe(this, Observer { event ->
@@ -504,7 +538,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
+    /**
+    * Set observers for the register fragment
+    */
     fun set_register_observer(registerViewModel: RegisterViewModel)
     {
         registerViewModel.registerUser.observe(this, Observer { event ->
@@ -514,6 +550,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    /**
+    * Update user preferences based on the user decision (add 3 if liked, remove 2 if disliked)
+    */
     fun update_preferences(genre: String, liked: Boolean)
     {
         var addition = 0
@@ -551,6 +590,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+    * Set bindings for the main find movie screen
+    */
     fun set_find_movie_binding(movieBinding: FindMovieFragmentBinding, movieAsync: MoviesAsynchronousGet, findMovieViewModel: FindMovieViewModel, _movieIndex: Int)
     {
         findMovieViewModel.movieGenres.observe(this, Observer { genres ->

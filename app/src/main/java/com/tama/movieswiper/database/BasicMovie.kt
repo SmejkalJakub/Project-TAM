@@ -1,3 +1,6 @@
+/**
+* Simple database model for the movie. This information will be saved in the InMemoryDatabase for each visited movie
+*/
 
 package com.tama.movieswiper.database
 

@@ -29,8 +29,6 @@ class LoginViewModel : ViewModel() {
             return
         }
 
-
-
         loginUser.postValue(Event(UserModel(loginEmail, loginPassword, null, auth)))
     }
 
@@ -38,7 +36,5 @@ class LoginViewModel : ViewModel() {
     {
         navController.navigate(R.id.navigation_register)
     }
-
-
 }
 

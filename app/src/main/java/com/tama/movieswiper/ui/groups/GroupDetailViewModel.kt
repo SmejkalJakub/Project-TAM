@@ -46,6 +46,9 @@ class GroupDetailViewModel : ViewModel() {
     val moviePoster = MutableLiveData<Bitmap>()
     val movieRuntime = MutableLiveData<String>()
 
+    /**
+    * Show recommendations for the movie based on all the users(that are in the group) preferences.
+    */
     fun showRecommendation(groupName: String?) {
         val database =
             Firebase.database("https://tama-project-26b9d-default-rtdb.europe-west1.firebasedatabase.app/").reference
@@ -112,6 +115,9 @@ class GroupDetailViewModel : ViewModel() {
         }
     }
 
+    /**
+    * Go over the preferences and select the most liked and most disliked
+    */
     fun process_preferences()
     {
         var likedGenres: MutableList<Int> = mutableListOf()
@@ -506,6 +512,9 @@ class GroupDetailViewModel : ViewModel() {
         }
     }
 
+    /**
+    * Get the actual movie details
+    */
     fun getMovieDetails(movieId: Int) {
 
         runBlocking {
@@ -533,6 +542,9 @@ class GroupDetailViewModel : ViewModel() {
         }
     }
 
+    /**
+    * Show the recommended movie on screen for the user
+    */
     fun show_recommended_movie(movie: TmdbMovie)
     {
         currentMovie = movie.id
